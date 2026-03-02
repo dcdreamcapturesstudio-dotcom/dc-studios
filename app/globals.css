@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+.font-serif {
+  font-family: var(--font-serif), Arial, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-sedgwick {
+  font-family: var(--font-sedgwick), Arial, sans-serif;
+}
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Custom transparent scrollbar */
+html {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgb(52, 50, 50) transparent; /* Firefox - thumb and track both transparent */
+}
+
+html::-webkit-scrollbar {
+  width: 2px; /* Chrome, Safari, Opera */
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent; /* Transparent track */
+}
+
+html::-webkit-scrollbar-thumb {
+  background: transparent; /* Transparent thumb */
+  border-radius: 2px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(137, 123, 123, 0.2); /* Slightly visible on hover */
+}
+
+/* Also apply to body for consistency */
+body {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: transparent transparent; /* Firefox - thumb and track both transparent */
+}
+
+body::-webkit-scrollbar {
+  width: 2px; /* Chrome, Safari, Opera */
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent; /* Transparent track */
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #c3b8b8; /* Transparent thumb */
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #817676; /* Slightly visible on hover */
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Text selection color */
+::selection {
+  background-color: rgb(33, 248, 87);
+  color: black;
+}
+
+::-moz-selection {
+  background-color: rgb(8, 255, 37);
+  color: black;
+}
+
+/* Lenis smooth scrolling support */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.4) 20%,
+    rgba(255, 255, 255, 1) 40%,
+    rgba(255, 255, 255, 1) 60%,
+    rgba(255, 255, 255, 0.4) 80%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 2s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
