@@ -42,11 +42,11 @@ export default function Reviews({ reviews = [] }) {
   const displayReviews = reviews && reviews.length > 0 ? reviews : fallbackReviews;
 
   return (
-    <section className="py-24 md:py-32 bg-neutral-950 overflow-hidden">
+    <section className="py-24 md:py-32 bg-neutral-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
         <Reveal>
-          <h3 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-neutral-500 mb-4">Client Love</h3>
-          <AnimatedText text="What They Say" className="font-serif text-4xl sm:text-5xl md:text-6xl text-white" />
+          <h3 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-neutral-600 mb-4">Client Love</h3>
+          <AnimatedText text="What They Say" className="font-serif text-4xl sm:text-5xl md:text-6xl text-black" />
         </Reveal>
       </div>
 
@@ -57,21 +57,21 @@ export default function Reviews({ reviews = [] }) {
           transition={{ repeat: Infinity, ease: "linear", duration: Math.max(20, displayReviews.length * 8) }}
         >
           {[...displayReviews, ...displayReviews, ...displayReviews, ...displayReviews].map((review, i) => (
-            <div key={i} className="w-[280px] sm:w-[320px] md:w-[400px] bg-black p-6 md:p-8 rounded border border-neutral-900 shrink-0 flex flex-col justify-between">
+            <div key={i} className="w-[280px] sm:w-[320px] md:w-[400px] bg-white p-6 md:p-8 rounded border border-neutral-200 shrink-0 flex flex-col justify-between">
               <div>
-                <div className="flex gap-1 mb-6 text-white">
+                <div className="flex gap-1 mb-6 text-black">
                   {[...Array(5)].map((_, j) => (
                      <Star 
                        key={j} 
                        size={16} 
-                       className={j < (review.rating || 5) ? 'fill-current' : 'text-neutral-700 fill-neutral-700'} 
+                       className={j < (review.rating || 5) ? 'fill-current' : 'text-neutral-300 fill-neutral-300'} 
                      />
                   ))}
                 </div>
-                <p className="text-neutral-300 font-display text-lg mb-8 leading-relaxed">&quot;{review.review_text}&quot;</p>
+                <p className="text-neutral-700 font-display text-lg mb-8 leading-relaxed">&quot;{review.review_text}&quot;</p>
               </div>
               <div>
-                <h4 className="font-serif text-xl text-white mb-1">{review.client_name}</h4>
+                <h4 className="font-serif text-xl text-black mb-1">{review.client_name}</h4>
                 <p className="text-sm text-neutral-500 font-display">{review.role || "Client"}</p>
               </div>
             </div>

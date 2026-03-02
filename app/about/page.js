@@ -55,7 +55,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="bg-neutral-950 min-h-screen text-white overflow-x-hidden font-display selection:bg-white selection:text-black">
+    <div className="bg-neutral-50 min-h-screen text-black overflow-x-hidden font-display selection:bg-black selection:text-white">
       <Header />
       
       <main>
@@ -75,8 +75,9 @@ export default function AboutPage() {
               sizes="100vw"
               className="object-cover" 
             />
+             <div className="absolute inset-0 bg-linear-to-t from-neutral-900 via-black/40 to-black/20" />
           </motion.div>
-          <div className="absolute inset-0 bg-linear-to-t from-neutral-950 via-black/20 to-black/40" />
+          <div className="absolute inset-0 bg-linear-to-t from-neutral-900 from-0% via-black/50 via-10% to-black/50 to-100%" />
           
           <div className="relative z-10 text-center max-w-4xl pt-20">
             <Reveal>
@@ -92,51 +93,121 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Philosophy / Story Section */}
-        <section className="py-24 md:py-40 px-6 bg-neutral-950">
-          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
+        {/* Section 1: Intro Text Split */}
+        <section className="py-24 md:py-32 px-6 bg-white min-h-[600px] flex items-center">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-8 items-center w-full">
+            <div className="w-full md:w-1/2 flex flex-col items-center justify-center text-center px-4 border-b md:border-b-0 md:border-r border-neutral-200 pb-16 md:pb-0 md:pr-16">
+              <Reveal>
+                <h2 className="font-antic text-4xl md:text-5xl lg:text-[42px] leading-[1.3] text-neutral-800 uppercase tracking-widest mb-10">
+                  We are here to<br />
+                  help you to<br />
+                  remember the<br />
+                  best days
+                </h2>
+                <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-neutral-500">
+                  Heart of best memories
+                </h3>
+              </Reveal>
+            </div>
             
-            <div className="w-full lg:w-1/2">
+            <div className="w-full md:w-1/2 flex flex-col justify-center px-4 md:pl-16 pt-10 md:pt-0">
               <Reveal>
-                <div className="relative h-[600px] w-full rounded-md overflow-hidden">
-                  <Image 
-                    src={contentBg}
-                    alt="Studio Workflow"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-                  />
+                <div className="font-display text-sm lg:text-[15px] text-neutral-800 leading-[1.8] space-y-8">
+                  <p>
+                    I believe the most important element to be captured in a photograph is emotion. The more emotional the shot is, the more it appeals to our senses, and the greater the connection we feel to it. If a picture conveys emotion &ndash; whether it's happiness, surprise, sorrow &ndash; it is successful. Photography has become my passion and source of happiness to capture emotion and personality, vibes and feelings; things you can't see, but surely feel.
+                  </p>
+                  <p>
+                    The connection with subject is what I love most about my job. That combined with photography, makes this the perfect job for me.
+                  </p>
+                  <div className="pt-8">
+                    <h4 className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-800 leading-[2.5]">
+                      We are here to help you to<br />
+                      remember the best days
+                    </h4>
+                  </div>
                 </div>
               </Reveal>
             </div>
+          </div>
+        </section>
 
-            <div className="w-full lg:w-1/2 text-center lg:text-left">
+        {/* Section 2: Black Banner & Image Split */}
+        <section className="w-full flex flex-col md:flex-row bg-black">
+          <div className="w-full md:w-1/2 text-white flex flex-col justify-center items-center lg:items-start p-16 lg:p-24 min-h-[500px]">
+            <Reveal>
+              <h2 className="font-antic text-3xl md:text-4xl lg:text-[42px] leading-[1.4] uppercase tracking-widest text-center lg:text-left text-neutral-200">
+                Make a statement<br />
+                through every picture.<br />
+                We will make a<br />
+                wonderful story
+              </h2>
+            </Reveal>
+          </div>
+          <div className="w-full md:w-1/2 relative min-h-[400px] lg:min-h-[600px]">
+             <Image 
+                src="/christian-bowen-I0ItPtIsVEE-unsplash.jpg" // High contrast portfolio image
+                alt="Statement Piece"
+                fill
+                className="object-cover"
+              />
+          </div>
+        </section>
+
+        {/* Section 3: Photographer Bio */}
+        <section className="bg-[#f2f1ec] w-full pt-16 md:pt-0">
+          <div className="flex flex-col lg:flex-row w-full">
+            <div className="w-full lg:w-1/2 relative min-h-[500px] md:min-h-[700px] lg:min-h-[900px]">
+               <Image 
+                  src={contentBg} // Tied to the backend Backgrounds uploader
+                  alt="Photographer Portrait"
+                  fill
+                  className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                />
+            </div>
+            
+            <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 md:p-16 xl:p-24 bg-[#f2f1ec]">
               <Reveal>
-                <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white mb-6 lg:mb-8">Our Philosophy</h2>
-                <div className="space-y-6 text-neutral-400 font-display text-base md:text-lg leading-relaxed">
+                <h2 className="font-antic text-4xl md:text-5xl lg:text-[52px] leading-tight uppercase text-neutral-800 mb-6">
+                  Hi! We are DC Studios
+                </h2>
+                <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-neutral-700 mb-12">
+                  Expressive moments, impressive art
+                </h3>
+                
+                <div className="font-display text-[14px] md:text-[15px] text-neutral-800 leading-[1.8] space-y-6">
                   <p>
-                    DC Studios was born out of a desire to create a sanctuary where raw emotion meets fine-art aesthetic. We specialize in isolating the pure, untouched beauty of newborns, the candid joy of toddlers, and the profound grace of maternity.
+                    Since childhood I always had a craving to learn and create something new in any form of art, whether it's painting, craft, knitting, stitching anything that fuels my passion of creating something new and understanding the beauty of art. It ignites my soul and keeps me alive.
                   </p>
                   <p>
-                    Every set we design and every lighting setup we craft is deeply intentional. We do not believe in mass-produced, cookie-cutter portraiture. Instead, we take the time to understand your vision, ensuring that the final gallery feels authentically *yours*.
+                    Photography gave a new meaning to my life. I started to express my feelings and emotions through pictures. Photographing people, places, nature, wildlife and capturing the true essence and beauty of life made my childhood dream come true.
                   </p>
                   <p>
-                    Safety and comfort are the cornerstones of our practice. Our studio is meticulously maintained, heated appropriately for infants, and equipped to provide a soothing, stress-free environment from the moment you walk through our doors.
+                    After photographing anything and everything, I started DC Studios as a full time service, specialized in Maternity, new born, baby and toddlers. I also love to photograph portrait photo shoots.
                   </p>
+                  <p>
+                    Time flies very quickly. So, I urge everyone to take out some time and capture all your beautiful moments to preserve and cherish them forever.
+                  </p>
+                </div>
+
+                <div className="mt-16 flex flex-col items-center md:items-start text-neutral-800 group cursor-default">
+                  <div className="flex items-center -ml-2">
+                    <span className="font-serif italic text-4xl pr-1 translate-y-1">DC Studios</span> 
+                    
+                  </div>
+                  <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-neutral-500 mt-2">Photography</span>
                 </div>
               </Reveal>
             </div>
-
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="py-24 md:py-32 bg-black px-6">
+        <section className="py-24 md:py-32 bg-white px-6">
           <div className="max-w-7xl mx-auto">
             <Reveal>
               <div className="mb-12 lg:mb-16 text-center">
                 <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-neutral-500 mb-4">Inquiries</h3>
-                <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white">Frequently Asked Questions</h2>
+                <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-black">Frequently Asked Questions</h2>
               </div>
             </Reveal>
             
@@ -147,15 +218,15 @@ export default function AboutPage() {
         </section>
 
         {/* Call to Action */}
-        <section className="py-32 bg-neutral-900 px-6">
+        <section className="py-32 bg-neutral-100 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <Reveal>
-              <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-white mb-6 lg:mb-8">Let's Create Together</h2>
-              <p className="text-neutral-400 font-display text-base md:text-lg mb-10 lg:mb-12">
+              <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-black mb-6 lg:mb-8">Let's Create Together</h2>
+              <p className="text-neutral-600 font-display text-base md:text-lg mb-10 lg:mb-12">
                 Have more questions or ready to reserve your date? We'd love to hear from you.
               </p>
               <div className="mt-12">
-              <Link href="/contact" className="px-8 py-4 bg-white text-black rounded-full font-medium tracking-wide hover:bg-neutral-200 transition inline-flex items-center gap-3 group">
+              <Link href="/contact" className="px-8 py-4 bg-black text-white rounded-full font-medium tracking-wide hover:bg-neutral-800 transition inline-flex items-center gap-3 group">
                 Let's Connect <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -166,7 +237,7 @@ export default function AboutPage() {
       </main>
 
       {/* Map Section */}
-      <section className="w-full h-[500px] relative grayscale hover:grayscale-0 transition-all duration-1000">
+      <section className="w-full max-w-7xl mx-auto h-[500px] relative  transition-all duration-1000 mb-19">
         <iframe 
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d84338.18135970713!2d79.45271729442399!3d13.64162437757282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d4bd47a017575%3A0xfaa6213e2fc92ed5!2sDc%20studio%20%2FExclusively%20for%20New%20born%2C%20Maternity%20and%20kids%20studio.!5e0!3m2!1sen!2sin!4v1772459817954!5m2!1sen!2sin" 
           width="100%" 
@@ -178,7 +249,6 @@ export default function AboutPage() {
           title="Studio Location"
           className="absolute inset-0"
         />
-        <div className="absolute inset-0 pointer-events-none border-t border-b border-neutral-900" />
       </section>
 
       <Footer />

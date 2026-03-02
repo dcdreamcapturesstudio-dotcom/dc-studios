@@ -51,28 +51,36 @@ const StickyServiceCard = ({ service, index }) => {
   const yImage = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <div ref={containerRef} className="min-h-screen flex items-center justify-center py-24 sticky top-0 bg-neutral-950 px-6 md:px-20">
-      <div className={`max-w-screen-2xl mx-auto w-full flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-12 lg:gap-24`}>
+    <div ref={containerRef} className="min-h-screen flex items-center justify-center py-24 sticky top-0 bg-neutral-50 px-6 md:px-20 overflow-hidden">
+      {/* Decorative Flowers */}
+      <div className="absolute top-0 -left-16 w-64 md:w-64 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
+        <Image src="/flower1.png" alt="Floral decoration top left" fill className="object-contain object-top-left rotate-45" />
+      </div>
+      <div className="absolute bottom-0 right-0 w-64 md:w-96 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
+        <Image src="/flower2.png" alt="Floral decoration bottom right" fill className="object-contain object-bottom-right" />
+      </div>
+
+      <div className={`relative z-10 max-w-screen-2xl mx-auto w-full flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-12 lg:gap-24`}>
         
         {/* Text Content */}
         <div className="w-full lg:w-1/2">
           <Reveal>
-            <span className="text-neutral-300 font-serif tracking-widest mb-4 block">0{index + 1} &mdash; STUDIO FEATURE</span>
-            <AnimatedText text={service.title} className="font-serif text-5xl md:text-7xl lg:text-[5rem] text-white mb-8" />
-            <p className="text-neutral-300 font-display text-lg md:text-xl leading-relaxed max-w-xl mb-12">
+            <span className="text-neutral-600 font-serif tracking-widest mb-4 block">0{index + 1} &mdash; STUDIO FEATURE</span>
+            <AnimatedText text={service.title} className="font-serif text-5xl md:text-7xl lg:text-[5rem] text-black mb-8" />
+            <p className="text-neutral-700 font-display text-lg md:text-xl leading-relaxed max-w-xl mb-12">
               {service.desc}
             </p>
             
             <div className="flex gap-6 items-center">
               <Link 
                 href="/#contact" 
-                className="px-8 py-4 bg-white text-black rounded-xl font-medium tracking-wide hover:bg-neutral-200 transition"
+                className="px-8 py-4 bg-black text-white rounded-xl font-medium tracking-wide hover:bg-neutral-800 transition"
               >
                 Book Session
               </Link>
               <Link 
                 href={`/gallery/${service.slug}`} 
-                className="group flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
+                className="group flex items-center gap-2 text-neutral-600 hover:text-black transition-colors"
                 onClick={(e) => {
                   if(service.slug === "toddler") {
                      e.preventDefault();
@@ -138,7 +146,7 @@ export default function ServicesPage() {
   });
 
   return (
-    <div className="bg-neutral-950 min-h-screen text-white overflow-x-hidden font-display selection:bg-white selection:text-black">
+    <div className="bg-neutral-50 min-h-screen text-black overflow-x-hidden font-display selection:bg-black selection:text-white">
       <Header />
       
       <main>
@@ -160,8 +168,8 @@ export default function ServicesPage() {
               className="object-cover" 
             />
           </motion.div>
-          {/* Dark overlay for text legibility */}
-          <div className="absolute inset-0 bg-linear-to-t from-neutral-950 via-black/60 to-black/30" />
+          {/* Dark overlay for text legibility, adjusted for light theme if needed or kept dark with white text */}
+          <div className="absolute inset-0 bg-linear-to-t from-neutral-900 via-black/40 to-black/20" />
           
           <div className="relative z-10 text-center flex flex-col items-center">
             <Reveal>
@@ -170,7 +178,7 @@ export default function ServicesPage() {
                 text="Creative Services" 
                 className="font-serif text-6xl md:text-8xl lg:text-[8rem] leading-none mb-8 text-white drop-shadow-2xl" 
               />
-              <p className="text-neutral-400 font-display max-w-2xl mx-auto text-lg md:text-xl leading-relaxed mb-12">
+              <p className="text-neutral-200 font-display max-w-2xl mx-auto text-lg md:text-xl leading-relaxed mb-12">
                 We don't just take photographs; we freeze time. Discover our bespoke styling, cinematic lighting, and dedicated care across all our studio sessions.
               </p>
             </Reveal>
@@ -188,23 +196,23 @@ export default function ServicesPage() {
         </section>
 
         {/* Sticky Scroll Flowing Sections */}
-        <section className="relative bg-neutral-950 pb-32">
+        <section className="relative bg-neutral-50 pb-32">
           {services.map((service, index) => (
             <StickyServiceCard key={index} service={service} index={index} />
           ))}
         </section>
         
         {/* Call to Action Footer block inside the page body */}
-        <section className="py-32 bg-black px-6 border-t border-neutral-900">
+        <section className="py-32 bg-white px-6 border-t border-neutral-200">
           <div className="max-w-4xl mx-auto text-center">
             <Reveal>
-              <h2 className="font-serif text-4xl md:text-6xl text-white mb-8">Ready to capture your story?</h2>
-              <p className="text-neutral-400 font-display text-lg mb-12">
+              <h2 className="font-serif text-4xl md:text-6xl text-black mb-8">Ready to capture your story?</h2>
+              <p className="text-neutral-600 font-display text-lg mb-12">
                 Every picture should be unique. Let us craft a wonderful narrative for your special day.
               </p>
               <Link 
                 href="/#contact" 
-                className="px-12 py-5 bg-white text-black rounded-full font-medium tracking-widest uppercase hover:bg-neutral-200 transition"
+                className="px-12 py-5 bg-black text-white rounded-full font-medium tracking-widest uppercase hover:bg-neutral-800 transition"
               >
                 Contact Studio
               </Link>

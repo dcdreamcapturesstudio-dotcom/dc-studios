@@ -20,7 +20,7 @@ export function FAQAccordion({ items }) {
           <div key={index} className="border-b border-neutral-800">
             <button
               onClick={() => toggleAccordion(index)}
-              className="w-full py-8 flex items-center justify-between text-left group transition-colors hover:text-white text-neutral-300"
+              className="w-full py-8 flex items-center justify-between text-left group transition-colors hover:text-neutral-900 text-neutral-700"
             >
               <span className="font-serif text-2xl md:text-3xl pr-8">{item.question}</span>
               <span className="shrink-0 w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center group-hover:border-white transition-colors">

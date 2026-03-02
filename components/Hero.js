@@ -71,7 +71,7 @@ export default function Hero({ images = [] }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="font-serif text-2xl md:text-4xl lg:text-5xl tracking-wide text-white uppercase mb-4"
+            className="font-antic text-2xl lg:text-2xl tracking-[0.5em] text-white uppercase mb-4"
           >
             Dream Capture Studio
           </motion.h1>

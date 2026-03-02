@@ -23,7 +23,7 @@ export default function CategoryGalleryGrid({ items = [] }) {
           return (
             <Reveal key={item.id}>
                 <div 
-                  className="relative w-full aspect-square md:aspect-4/5 overflow-hidden group cursor-pointer bg-neutral-900"
+                  className="relative w-full aspect-square md:aspect-4/5 overflow-hidden group cursor-pointer bg-neutral-100"
                   onClick={() => handleOpenLightbox(item.id, images)}
                 >
                   <Image 
@@ -42,7 +42,7 @@ export default function CategoryGalleryGrid({ items = [] }) {
                       <Layers size={14} />
                     </div>
                   )}
-                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
                     <Plus size={20} className="font-light" />
                   </div>
                 </div>
@@ -56,7 +56,7 @@ export default function CategoryGalleryGrid({ items = [] }) {
           <Reveal>
             <button 
               onClick={() => setVisibleCount(prev => prev + 8)}
-              className="px-10 py-4 bg-transparent border border-neutral-700 text-neutral-300 rounded-full font-medium tracking-widest uppercase hover:text-white hover:border-neutral-400 transition-all duration-300"
+              className="px-10 py-4 bg-transparent border border-neutral-300 text-neutral-700 rounded-full font-medium tracking-widest uppercase hover:text-black hover:border-neutral-600 transition-all duration-300"
             >
               Load More
             </button>

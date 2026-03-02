@@ -6,6 +6,7 @@ import { Reveal } from "../../../components/Reveal";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import CategoryGalleryGrid from "../../../components/CategoryGalleryGrid";
+import AnimatedHeroImage from "../../../components/AnimatedHeroImage";
 
 import { categories } from "../../../lib/constants";
 import { supabase } from "../../../lib/supabase";
@@ -62,34 +63,26 @@ export default async function GalleryPage({ params }) {
   const heroImageSrc = uploadedImage || fallbackImage || '/placeholder.jpg';
 
   return (
-    <div className="bg-black min-h-screen text-white overflow-x-hidden font-display selection:bg-white selection:text-black">
+    <div className="bg-white min-h-screen text-black overflow-x-hidden font-display selection:bg-black selection:text-white">
       <Header />
-      <main className="bg-neutral-950 min-h-screen">
+      <main className="bg-neutral-50 min-h-screen">
       
       {/* Full Screen Hero Section */}
       <section className="relative w-full h-screen flex flex-col justify-end px-6 pb-24 md:pb-32 overflow-hidden">
         {heroImageSrc && (
-          <Image 
-            src={heroImageSrc} 
-            alt={currentCategory.name} 
-            fill 
-            priority={true}
-            quality={90}
-            sizes="100vw"
-            className="object-cover" 
-          />
+          <AnimatedHeroImage src={heroImageSrc} alt={currentCategory.name} />
         )}
-        {/* Dark overlay for text legibility */}
-        <div className="absolute inset-0 bg-linear-to-t from-neutral-950 via-black/50 to-black/20" />
+        {/* Dark overlay for text legibility adjusted for light theme text reading */}
+         <div className="absolute inset-0 bg-linear-to-t from-neutral-800 via-black/40 to-black/20" />
         
         <div className="relative z-10 max-w-screen-2xl mx-auto w-full px-0 md:px-10">
-          <Link href="/#gallery" className="inline-flex items-center gap-2 text-neutral-300 hover:text-white transition-colors mb-6 md:mb-8 group">
+          <Link href="/#gallery" className="inline-flex items-center gap-2 text-neutral-300 hover:text-black transition-colors mb-6 md:mb-8 group">
             <ArrowLeft className="transform group-hover:-translate-x-1 transition-transform" size={20} />
             <span className="font-serif italic text-lg tracking-wide">Back to Home</span>
           </Link>
 
           <Reveal>
-            <h3 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-neutral-400 mb-4">Gallery Collection</h3>
+            <h3 className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-neutral-300 mb-4">Gallery Collection</h3>
             <AnimatedText text={currentCategory.name} className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-[6rem] mb-4 md:mb-6 text-white" />
             <p className="text-neutral-300 font-display max-w-2xl text-base md:text-lg leading-relaxed">
               {currentCategory.desc} Discover the full collection of moments captured with precision and emotion.
@@ -99,7 +92,7 @@ export default async function GalleryPage({ params }) {
       </section>
 
       {/* Gallery Grid */}
-      <section className="py-24 px-6 bg-neutral-950">
+      <section className="py-24 px-6 bg-neutral-50">
         <div className="max-w-screen-2xl mx-auto">
           <CategoryGalleryGrid items={fullCategoryItems} />
         </div>

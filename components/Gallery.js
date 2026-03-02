@@ -16,11 +16,11 @@ export default function Gallery({ galleryItems = [], categories = defaultCategor
   };
 
   return (
-    <section id="gallery" className="py-24 md:py-32 bg-neutral-950 px-6">
+    <section id="gallery" className="py-24 md:py-32 bg-neutral-50 px-6">
       <div className="max-w-screen-2xl mx-auto">
         <div className="mb-24">
           <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-neutral-500 mb-4 text-center">Portfolio</h3>
-          <AnimatedText text="Gallery / Featured Works" className="font-serif text-4xl md:text-5xl lg:text-6xl text-center text-white" />
+          <AnimatedText text="Gallery / Featured Works" className="font-antic text-4xl md:text-5xl lg:text-6xl text-center text-black uppercase" />
         </div>
 
         <div className="space-y-32">
@@ -35,17 +35,17 @@ export default function Gallery({ galleryItems = [], categories = defaultCategor
             if (items.length === 0) return null;
 
             return (
-              <div key={idx} className="border-t border-neutral-800 pt-12">
+              <div key={idx} className="border-t border-neutral-200 pt-12">
                 <Reveal>
                   <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                     <div>
-                      <AnimatedText text={category.name} className="font-serif text-3xl sm:text-4xl md:text-5xl text-white mb-2 md:mb-4" />
-                      <p className="text-neutral-400 font-display max-w-xl text-base md:text-lg">
+                      <AnimatedText text={category.name} className="font-antic uppercase text-3xl sm:text-4xl md:text-5xl text-black mb-2 md:mb-4" />
+                      <p className="text-neutral-600 font-display max-w-xl text-base md:text-lg">
                         {category.desc}
                       </p>
                     </div>
                     
-                    <Link href={`/gallery/${category.slug}`} className="group flex items-center gap-3 text-neutral-300 hover:text-white transition-colors">
+                    <Link href={`/gallery/${category.slug}`} className="group flex items-center gap-3 text-neutral-700 hover:text-black transition-colors">
                       <span className="font-serif italic text-xl md:text-2xl">View More</span>
                       <ArrowUpRight className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={28} />
                     </Link>
@@ -56,7 +56,7 @@ export default function Gallery({ galleryItems = [], categories = defaultCategor
                   {items.map((item, itemIdx) => (
                     <Reveal key={item.id || `${idx}-${itemIdx}`}>
                         <div 
-                          className="relative w-full aspect-square md:aspect-4/5 overflow-hidden group cursor-pointer bg-neutral-900"
+                          className="relative w-full aspect-square md:aspect-4/5 overflow-hidden group cursor-pointer bg-neutral-100"
                           onClick={() => {
                             const images = Array.isArray(item.image_urls) ? item.image_urls : [item.image];
                             handleOpenLightbox(item.id || `${idx}-${itemIdx}`, images);
@@ -82,7 +82,7 @@ export default function Gallery({ galleryItems = [], categories = defaultCategor
                           )}
 
                           {/* Plus Icon Overlay */}
-                          <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
                             <Plus size={20} className="font-light" />
                           </div>
                         </div>

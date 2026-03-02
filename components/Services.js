@@ -29,11 +29,19 @@ export default function Services({ services = [] }) {
   }, []);
 
   return (
-    <section id="services" ref={containerRef} className="py-24 md:py-40 bg-black px-6">
-      <div className="max-w-7xl mx-auto">
+    <section id="services" ref={containerRef} className="py-24 md:py-40 bg-white px-6 relative overflow-hidden">
+      {/* Decorative Flowers */}
+      <div className="absolute top-0 -left-16 w-64 md:w-64 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
+        <Image src="/flower1.png" alt="Floral decoration top left" fill className="object-contain object-top-left rotate-45" />
+      </div>
+      <div className="absolute bottom-0 right-0 w-64 md:w-96 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
+        <Image src="/flower2.png" alt="Floral decoration bottom right" fill className="object-contain object-bottom-right" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <Reveal>
           <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-neutral-500 mb-4">Our Expertise</h3>
-          <AnimatedText text="Our Services" className="font-serif text-4xl md:text-6xl mb-16 text-white" />
+          <AnimatedText text="Our Services" className="font-antic text-4xl md:text-6xl mb-16 text-black uppercase" />
         </Reveal>
         
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-16 md:gap-8 lg:gap-12 pb-16">
@@ -44,11 +52,11 @@ export default function Services({ services = [] }) {
               className="h-full"
             >
               <Reveal>
-                <div className="group border-t border-neutral-800 pt-8 hover:border-neutral-400 transition-colors duration-500 cursor-pointer h-full flex flex-col">
-                  <AnimatedText text={service.title} className="font-serif text-3xl mb-4 group-hover:text-white transition-colors" />
-                  <p className="text-neutral-400 font-display leading-relaxed mb-6 grow">{service.desc}</p>
+                <div className="group border-t border-neutral-200 pt-8 hover:border-neutral-600 transition-colors duration-500 cursor-pointer h-full flex flex-col">
+                  <AnimatedText text={service.title} className="font-serif text-3xl mb-4 group-hover:text-black transition-colors" />
+                  <p className="text-neutral-600 font-display leading-relaxed mb-6 grow">{service.desc}</p>
                   
-                  <div className="relative w-full h-56 md:h-64 rounded overflow-hidden mb-6">
+                  <div className="relative w-full h-56 md:h-64 overflow-hidden mb-6">
                     <Image 
                       src={service.image_url} 
                       alt={service.title} 

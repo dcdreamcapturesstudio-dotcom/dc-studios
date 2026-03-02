@@ -75,15 +75,15 @@ export default async function Home() {
   });
 
   return (
-    <div className="bg-black min-h-screen text-white overflow-hidden font-display selection:bg-white selection:text-black">
+    <div className="bg-white min-h-screen text-black overflow-hidden font-display selection:bg-black selection:text-white">
       <Header />
       <Hero images={heroImages} />
       <Services services={services} />
 
-      <section className="py-24 md:py-40 bg-neutral-950 flex items-center justify-center px-6">
+      <section className="py-24 md:py-40 bg-neutral-200 flex items-center justify-center px-6">
         <AnimatedText 
           text="We don't just take photographs, we freeze time, preserving the innocence of today for the nostalgia of tomorrow."
-          className="max-w-4xl text-center font-serif text-4xl md:text-5xl lg:text-6xl leading-tight text-neutral-200"
+          className="max-w-4xl text-center font-antic text-4xl md:text-5xl lg:text-5xl leading-tight text-neutral-800 uppercase tracking-wider"
         />
       </section>
 

@@ -12,17 +12,13 @@
   font-family: var(--font-sedgwick), Arial, sans-serif;
 }
 
+.font-antic {
+  font-family: var(--font-antic), Arial, sans-serif;
+}
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 html,
@@ -34,7 +30,7 @@ body {
 /* Custom transparent scrollbar */
 html {
   scrollbar-width: thin; /* Firefox */
-  scrollbar-color: rgb(52, 50, 50) transparent; /* Firefox - thumb and track both transparent */
+  scrollbar-color: rgb(194, 177, 177) black; /* Firefox - thumb and track both transparent */
 }
 
 html::-webkit-scrollbar {
@@ -42,7 +38,7 @@ html::-webkit-scrollbar {
 }
 
 html::-webkit-scrollbar-track {
-  background: transparent; /* Transparent track */
+  background: black; /* Transparent track */
 }
 
 html::-webkit-scrollbar-thumb {
@@ -126,10 +122,10 @@ html.lenis body {
 .animate-shimmer {
   background: linear-gradient(
     to right,
-    rgba(255, 255, 255, 0.4) 20%,
-    rgba(255, 255, 255, 1) 40%,
-    rgba(255, 255, 255, 1) 60%,
-    rgba(255, 255, 255, 0.4) 80%
+    rgba(0, 0, 0, 0.4) 20%,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 0.4) 80%
   );
   background-size: 200% auto;
   color: transparent;
@@ -138,8 +134,3 @@ html.lenis body {
   animation: shimmer 2s linear infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
