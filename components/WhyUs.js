@@ -20,10 +20,10 @@ export default function WhyUs({ bgImage = "/toa-heftiba-C-8uOz7GluA-unsplash.jpg
   return (
     <section id="about" ref={containerRef} className="py-20 md:py-32 bg-neutral-50 relative overflow-hidden">
       {/* Decorative Flowers */}
-      <div className="absolute top-2 left-0 w-64 md:w-96 md:-mt-10 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
+      <div className="absolute md:top-2 top-10 left-0 w-34 md:w-96 md:-mt-10 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
         <Image src="/flower1.png" alt="Floral decoration top left" fill className="object-contain object-top-left -rotate-45" />
       </div>
-      <div className="absolute bottom-0 right-0 w-64 md:w-96 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
+      <div className="absolute md:bottom-0 bottom-20 right-0 w-34 md:w-96 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
         <Image src="/flower2.png" alt="Floral decoration bottom right" fill className="object-contain object-bottom-right" />
       </div>
 

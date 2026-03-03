@@ -31,10 +31,10 @@ export default function Services({ services = [] }) {
   return (
     <section id="services" ref={containerRef} className="py-24 md:py-40 bg-white px-6 relative overflow-hidden">
       {/* Decorative Flowers */}
-      <div className="absolute top-0 -left-16 w-64 md:w-64 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
+      <div className="absolute top-0 -left-16 w-44 md:w-64 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
         <Image src="/flower1.png" alt="Floral decoration top left" fill className="object-contain object-top-left rotate-45" />
       </div>
-      <div className="absolute bottom-0 right-0 w-64 md:w-96 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
+      <div className="absolute bottom-20 md:bottom-0 right-0 w-44 md:w-96 aspect-square pointer-events-none opacity-60 mix-blend-multiply z-0">
         <Image src="/flower2.png" alt="Floral decoration bottom right" fill className="object-contain object-bottom-right" />
       </div>
 

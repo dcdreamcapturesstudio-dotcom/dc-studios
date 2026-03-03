@@ -50,7 +50,7 @@ export default function Hero({ images = [] }) {
             <Image
               src={images[currentIndex]}
               fill
-              unoptimized
+              sizes="(max-width: 768px) 100vw, 100vw"
               alt="Hero background image"
               className="object-cover"
               priority={currentIndex === 0} // prioritize loading the first image
