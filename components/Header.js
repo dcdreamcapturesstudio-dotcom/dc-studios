@@ -14,7 +14,7 @@ export default function Header() {
   const [mobilePortfolioOpen, setMobilePortfolioOpen] = useState(false);
   const pathname = usePathname();
 
-  const isSolidPage = pathname === '/services' || pathname === '/portfolio';
+  const isSolidPage = pathname === '/services' || pathname === '/portfolio' || pathname === '/contact';
 
   useEffect(() => {
     const handleScroll = () => {

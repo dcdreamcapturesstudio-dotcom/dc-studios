@@ -57,10 +57,13 @@ export default async function Home() {
   
   // Merge Services: Primary source is DB, fallback to hardcoded list if empty
   let services = [];
+  const getBaseTitle = (t) => t ? t.replace(/ Session$/i, '').replace(/ Photography$/i, '').trim() : "";
+
   if (servicesData && servicesData.length > 0) {
     services = servicesData.map(s => {
       // Find fallback info to enrich the DB data (e.g. description/slug)
-      const fallback = fallbackServices.find(f => f.title === s.title);
+      // Use normalized titles for matching to handle "Newborn" vs "Newborn Session"
+      const fallback = fallbackServices.find(f => getBaseTitle(f.title) === getBaseTitle(s.title));
       return {
         title: s.title,
         slug: s.slug || fallback?.slug || s.title.toLowerCase().replace(/\s+/g, '-'),
