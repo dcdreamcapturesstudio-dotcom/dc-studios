@@ -21,6 +21,11 @@ export default async function ServicePage({ params }) {
 
   // Get the display title from constants
   const currentCategory = categories.find((c) => c.slug === slug);
+  
+  if (!currentCategory) {
+    notFound();
+  }
+
   const serviceTitle = currentCategory?.name || detailsData.heroTitle;
 
   // Mapping between gallery category filters and backgrounds table keys (provided by user)
