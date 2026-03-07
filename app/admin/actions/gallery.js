@@ -3,71 +3,18 @@
 import { revalidatePath } from 'next/cache';
 import { supabase } from '@/lib/supabase';
 
-export async function uploadImage(formData) {
+export async function saveGalleryRecord({ title, category, urls }) {
   try {
-    const files = formData.getAll('images');
-    const title = formData.get('title');
-    const category = formData.get('tags'); // The form uses name="tags" for the category dropdown
-
-    console.log("Starting upload action:", { 
-      filesCount: files?.length, 
-      title, 
-      category 
-    });
-
-    if (!files || files.length === 0 || !title) {
-      console.error("Missing required fields");
+    if (!urls || urls.length === 0 || !title || !category) {
       return { error: 'Missing required fields' };
     }
 
-    if (files.length > 2) {
-      return { error: 'Maximum 2 images allowed per upload' };
-    }
-
-    const uploadedUrls = [];
-
-    // Upload each file to Supabase Storage
-    for (const file of files) {
-      console.log("Processing file:", { name: file.name, size: file.size, type: file.type });
-      if (!file.name || file.size === 0) {
-        console.warn("Skipping empty file buffer");
-        continue;
-      }
-      
-      const timeHash = Math.random().toString(36).substring(2, 8);
-      const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '-').toLowerCase();
-      const filename = `${Date.now()}-${timeHash}-${safeName}`;
-
-      const { data, error: uploadError } = await supabase.storage
-        .from('admin-uploads')
-        .upload(filename, file, {
-          contentType: file.type,
-          upsert: false
-        });
-
-      if (uploadError) {
-        console.error("Storage upload error:", uploadError);
-        return { error: `Failed to upload image: ${uploadError.message}` };
-      }
-
-      // Construct public URL
-      const publicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/admin-uploads/${data.path}`;
-      uploadedUrls.push(publicUrl);
-    }
-    
-    console.log("Finished storage uploads. URLs to insert:", uploadedUrls);
-
-    if (uploadedUrls.length === 0) {
-      return { error: 'No valid files were uploaded to storage.' };
-    }
-
-    // Insert record into gallery_images database
     const { error: dbError } = await supabase
       .from('gallery_images')
       .insert({
-        title: title,
-        category: category,
-        image_urls: uploadedUrls
+        title,
+        category,
+        image_urls: urls
       });
 
     if (dbError) {
@@ -75,12 +22,10 @@ export async function uploadImage(formData) {
       return { error: `Failed to save record: ${dbError.message}` };
     }
 
-    // Revalidate paths so the client gets updated HTML
     revalidatePath('/', 'layout');
-    
     return { success: true };
   } catch (error) {
-    console.error('Upload Error full trace:', error);
+    console.error('Save Error:', error);
     return { error: error.message || String(error) };
   }
 }

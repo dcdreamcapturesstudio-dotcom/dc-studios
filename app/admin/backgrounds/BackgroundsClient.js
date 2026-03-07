@@ -60,9 +60,37 @@ export default function BackgroundsClient({ allItems }) {
     setIsUploading(true);
     setError(null);
     setSuccess(false);
-    const formData = new FormData(e.currentTarget);
+
+    const fileInput = e.currentTarget.querySelector('input[name="image"]');
+    const file = fileInput?.files?.[0];
+
+    if (!file || !selectedCategory) {
+      setError('Missing file or category');
+      setIsUploading(false);
+      return;
+    }
+
     try {
-      const res = await uploadBackground(formData, selectedCategory);
+      const timeHash = Math.random().toString(36).substring(2, 8);
+      const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '-').toLowerCase();
+      const filename = `bgs/${Date.now()}-${timeHash}-${safeName}`;
+
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('admin-uploads')
+        .upload(filename, file, {
+          contentType: file.type,
+          upsert: false
+        });
+
+      if (uploadError) throw uploadError;
+
+      const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/admin-uploads/${uploadData.path}`;
+
+      const res = await saveBackgroundRecord({
+        imageUrl,
+        category: selectedCategory
+      });
+
       if (res?.error) {
         setError(res.error);
       } else {
@@ -72,8 +100,9 @@ export default function BackgroundsClient({ allItems }) {
         setSuccess(true);
         startTransition(() => router.refresh());
       }
-    } catch {
-      setError('An error occurred during upload.');
+    } catch (err) {
+      console.error(err);
+      setError(err.message || 'An error occurred during upload.');
     } finally {
       setIsUploading(false);
     }

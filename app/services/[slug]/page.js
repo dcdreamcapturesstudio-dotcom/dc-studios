@@ -10,6 +10,9 @@ export function generateStaticParams() {
   }));
 }
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function ServicePage({ params }) {
   const { slug } = await params;
   
@@ -28,7 +31,7 @@ export default async function ServicePage({ params }) {
 
   const serviceTitle = currentCategory?.name || detailsData.heroTitle;
 
-  // Mapping between gallery category filters and backgrounds table keys (provided by user)
+  // Mapping between gallery category filters and backgrounds table keys
   const bgCategoryMap = {
     Maternity: "maternity",
     Newborn: "newBorn",
@@ -39,20 +42,17 @@ export default async function ServicePage({ params }) {
   };
 
   // Fetch from Supabase for dynamic images (Hero and Gallery)
-  // We use the "in" filter to match both the standard capitalized label and the consumer-key label
   const categoryFilters = [currentCategory.filter];
   const altFilter = bgCategoryMap[currentCategory.filter];
   if (altFilter) categoryFilters.push(altFilter);
 
   const [
-    { data: serviceData },
+    { data: bgsData },
     { data: galleryData }
   ] = await Promise.all([
     supabase
-      .from('services')
-      .select('image_url')
-      .eq('title', serviceTitle)
-      .limit(1),
+      .from('backgrounds')
+      .select('*'),
     supabase
       .from('gallery_images')
       .select('*')
@@ -71,7 +71,7 @@ export default async function ServicePage({ params }) {
     return [];
   });
 
-  const uploadedImage = Array.isArray(serviceData) && serviceData.length > 0 ? serviceData[0].image_url : serviceData?.image_url;
+  const uploadedImage = bgsData?.find(b => b.category === bgCategoryMap[currentCategory.filter])?.image_url;
 
   if (uploadedImage) {
     heroImage = uploadedImage;
@@ -95,6 +95,7 @@ export default async function ServicePage({ params }) {
       heroImage={heroImage} 
       detailsData={detailsData} 
       galleryImages={galleryImages}
+      bgItems={bgsData || []}
     />
   );
 }

@@ -13,6 +13,7 @@ import { supabase } from "@/lib/supabase";
 import AnimatedText from "@/components/AnimateText";
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function Home() {
   // Fetch required data from Supabase concurrently

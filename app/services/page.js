@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
@@ -7,9 +5,10 @@ import AnimatedText from "../../components/AnimateText";
 import { Reveal } from "../../components/Reveal";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
 import { supabase } from "../../lib/supabase";
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const fallbackServices = [
   {
@@ -30,7 +29,6 @@ const fallbackServices = [
     img: "/toa-heftiba-C-8uOz7GluA-unsplash.jpg",
     slug: "maternity"
   },
- 
   {
     title: "Family Session",
     desc: "Capturing the unique bond and love of your family. Natural poses and timeless portraits in a relaxed studio or outdoor setting.",
@@ -51,24 +49,21 @@ const fallbackServices = [
   }
 ];
 
-// Simplified Service Grid Card for the new All Services layout
-const ServiceGridCard = ({ service, index }) => {
+const ServiceGridCard = ({ service }) => {
   return (
     <Reveal>
       <div className="group flex flex-col w-full bg-white overflow-hidden">
-        {/* Image Container with aspect ratio */}
         <Link href={`/services/${service.slug}`} className="relative aspect-[3/3] overflow-hidden block">
           <Image 
             src={service.img} 
             alt={service.title} 
             fill 
-            sizes="(max-width: 768px) 10vw, 50vw"
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
         </Link>
         
-        {/* Text Content */}
         <div className="py-8 flex flex-col items-center text-center">
           <h3 className="font-antic text-2xl md:text-3xl text-black uppercase tracking-[0.2em] mb-8">
             {service.title}
@@ -84,12 +79,6 @@ const ServiceGridCard = ({ service, index }) => {
             <Link 
               href={`/gallery/${service.slug}`}
               className="w-full sm:w-auto px-8 py-3 border border-black text-black text-sm tracking-[0.2em] uppercase hover:bg-black hover:text-white transition-all duration-300 font-bold"
-              onClick={(e) => {
-                if(service.slug === "toddler") {
-                   e.preventDefault();
-                   window.location.href = "/#gallery"
-                }
-              }}
             >
               View Portfolio
             </Link>
@@ -100,22 +89,21 @@ const ServiceGridCard = ({ service, index }) => {
   );
 };
 
-export default function ServicesPage() {
-  const [servicesData, setServicesData] = useState([]);
+export default async function ServicesPage() {
+  const { data: servicesData } = await supabase
+    .from('services')
+    .select('*')
+    .order('created_at', { ascending: false });
 
-  useEffect(() => {
-    async function loadData() {
-      const svcRes = await supabase.from('services').select('*').order('created_at', { ascending: false });
-      if (svcRes.data) {
-        setServicesData(svcRes.data);
-      }
-    }
-    loadData();
-  }, []);
+  const getBaseTitle = (t) => t ? t.replace(/ Session$/i, '').replace(/ Photography$/i, '').trim() : "";
 
   const services = fallbackServices.map(fallback => {
-    const uploaded = servicesData?.find(s => s.title === fallback.title);
-    return uploaded ? { ...fallback, img: uploaded.image_url, title: uploaded.title } : fallback;
+    const dbMatch = servicesData?.find(s => getBaseTitle(s.title) === getBaseTitle(fallback.title));
+    return {
+      ...fallback,
+      img: dbMatch?.image_url || fallback.img,
+      title: dbMatch?.title || fallback.title
+    };
   });
 
   return (
@@ -123,7 +111,6 @@ export default function ServicesPage() {
       <Header />
       
       <main>
-        {/* Minimal Hero Header */}
         <section className="relative w-full pt-40 pb-20 flex flex-col justify-center items-center px-6">
           <div className="relative z-10 text-center flex flex-col items-center max-w-4xl">
             <Reveal>
@@ -140,21 +127,19 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Services Grid Layout */}
         <section className="relative bg-white pb-32 px-6 md:px-12 lg:px-20">
           <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
             {services.map((service, index) => (
-              <ServiceGridCard key={index} service={service} index={index} />
+              <ServiceGridCard key={index} service={service} />
             ))}
           </div>
         </section>
         
-        {/* Simple Footer Call to Action */}
         <section className="py-32 bg-neutral-50 px-6 border-t border-neutral-100">
           <div className="max-w-4xl mx-auto text-center">
             <Reveal>
               <h2 className="font-antic text-4xl md:text-5xl text-black mb-8 uppercase tracking-widest">Ready to capture your story?</h2>
-              <p className="text-neutral-500 font-antic text-lg mb-12 uppercase tracking-wide">
+              <p className="text-neutral-500 font-serif italic text-lg mb-12 tracking-wide">
                 Every picture should be unique. Let us craft a wonderful narrative for your special day.
               </p>
               <Link 
@@ -166,7 +151,6 @@ export default function ServicesPage() {
             </Reveal>
           </div>
         </section>
-
       </main>
 
       <Footer />

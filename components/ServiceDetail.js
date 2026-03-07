@@ -167,7 +167,7 @@ const PackageBlock = ({ pkg, index }) => {
   );
 };
 
-export default function ServiceDetail({ slug, serviceTitle, heroImage, detailsData, galleryImages = [] }) {
+export default function ServiceDetail({ slug, serviceTitle, heroImage, detailsData, galleryImages = [], bgItems = [] }) {
   const containerRef = useRef(null);
 
   const { scrollY } = useScroll();
@@ -273,9 +273,12 @@ export default function ServiceDetail({ slug, serviceTitle, heroImage, detailsDa
           <TestimonialSlider testimonials={detailsData.testimonials} staticImages={detailsData.portfolioImages} />
         </div>
 
-        {/* Memories Row (Mockup 5) */}
         <div className="relative z-10">
-          <HomePortfolioPreview header="Adding the memories of every moment" />
+          <HomePortfolioPreview 
+            header="Adding the memories of every moment" 
+            bgItems={bgItems}
+            galleryItems={galleryImages}
+          />
         </div>
 
       </main>

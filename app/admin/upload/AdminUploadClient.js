@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useRef, useTransition } from 'react';
-import { uploadImage } from '../actions/gallery';
+import { saveGalleryRecord } from '../actions/gallery';
 import { Upload, Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase';
 
 export default function AdminUploadClient({ categories = [] }) {
   const [isUploading, setIsUploading] = useState(false);
@@ -53,16 +54,44 @@ export default function AdminUploadClient({ categories = [] }) {
     setSuccess(false);
     
     const formData = new FormData(e.currentTarget);
-    formData.delete('images');
+    const title = formData.get('title');
+    const category = formData.get('tags');
     const fileInput = e.currentTarget.querySelector('input[name="images"]');
-    if (fileInput && fileInput.files) {
-      Array.from(fileInput.files).forEach(file => {
-        formData.append('images', file);
-      });
+    const files = Array.from(fileInput?.files || []);
+
+    if (files.length === 0) {
+      setError('Please select at least one image.');
+      setIsUploading(false);
+      return;
     }
-    
+
     try {
-      const res = await uploadImage(formData);
+      const uploadedUrls = [];
+
+      for (const file of files) {
+        const timeHash = Math.random().toString(36).substring(2, 8);
+        const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '-').toLowerCase();
+        const filename = `${Date.now()}-${timeHash}-${safeName}`;
+
+        const { data, error: uploadError } = await supabase.storage
+          .from('admin-uploads')
+          .upload(filename, file, {
+            contentType: file.type,
+            upsert: false
+          });
+
+        if (uploadError) throw uploadError;
+
+        const publicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/admin-uploads/${data.path}`;
+        uploadedUrls.push(publicUrl);
+      }
+
+      const res = await saveGalleryRecord({
+        title,
+        category,
+        urls: uploadedUrls
+      });
+
       if (res?.error) {
         setError(res.error);
       } else {
@@ -74,7 +103,8 @@ export default function AdminUploadClient({ categories = [] }) {
         });
       }
     } catch (err) {
-      setError('An error occurred during upload.');
+      console.error(err);
+      setError(err.message || 'An error occurred during upload.');
     } finally {
       setIsUploading(false);
     }
