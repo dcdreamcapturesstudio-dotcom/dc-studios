@@ -78,7 +78,7 @@ export default function Contact() {
                     Follow
                   </Link>
                   <Link href="https://instagram.com/dc.dreamcapturestudio" className="flex-1 md:flex-none px-12 py-2 bg-[#2a2a2a] hover:bg-[#333333] border border-[#333333] transition-colors font-semibold text-sm rounded-lg text-white text-center">
-                    Visit our Instagram
+                    Visit
                   </Link>
                 </div>
               </div>
