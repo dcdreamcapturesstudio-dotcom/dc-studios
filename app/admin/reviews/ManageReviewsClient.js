@@ -73,10 +73,10 @@ export default function ManageReviewsClient({ initialReviews }) {
         <h1 className="text-4xl font-serif mb-2 text-black">Manage Reviews</h1>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
         {/* Add Review Form */}
         <div className="lg:col-span-1">
-          <div className="bg-white border border-neutral-200 rounded-xl p-6 shadow-sm sticky top-24">
+          <div className="bg-white border border-neutral-200 rounded-xl p-6 shadow-sm md:sticky md:top-24">
             <h2 className="text-xl font-serif mb-6 text-black">Add Review</h2>
 
             {error && (

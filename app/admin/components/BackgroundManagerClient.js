@@ -24,6 +24,21 @@ export default function BackgroundManagerClient({
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
+      const MAX_SIZE = 25 * 1024 * 1024; // 25MB
+      if (!file.type.startsWith('image/')) {
+        setError(`Invalid format: "${file.name}" is not an image file.`);
+        setPreviewUrl(null);
+        e.target.value = '';
+        return;
+      }
+      if (file.size > MAX_SIZE) {
+        const sizeInMb = (file.size / (1024 * 1024)).toFixed(1);
+        setError(`File too large: "${file.name}" is ${sizeInMb}MB. Maximum allowed is 25MB.`);
+        setPreviewUrl(null);
+        e.target.value = '';
+        return;
+      }
+      setError(null);
       setPreviewUrl(URL.createObjectURL(file));
     } else {
       setPreviewUrl(null);
@@ -84,9 +99,9 @@ export default function BackgroundManagerClient({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
         <div className="lg:col-span-1">
-          <div className="bg-white border border-neutral-200 rounded-xl p-6 shadow-sm sticky top-24">
+          <div className="bg-white border border-neutral-200 rounded-xl p-6 shadow-sm md:sticky md:top-24">
             <h2 className="text-xl font-serif mb-6 text-black">Upload New</h2>
             
             {error && (
@@ -149,6 +164,7 @@ export default function BackgroundManagerClient({
                     <div className="px-4 py-8">
                       <Upload className="mx-auto h-8 w-8 text-neutral-400 group-hover:text-black mb-2 transition-colors" />
                       <span className="text-sm font-medium text-black block">Click or drag image</span>
+                      <span className="text-[10px] text-neutral-400 block mt-1">Max file size: 25MB</span>
                     </div>
                   )}
                 </div>

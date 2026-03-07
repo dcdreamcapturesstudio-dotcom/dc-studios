@@ -33,7 +33,26 @@ export default function BackgroundsClient({ allItems }) {
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
-    setPreviewUrl(file ? URL.createObjectURL(file) : null);
+    if (file) {
+      const MAX_SIZE = 25 * 1024 * 1024; // 25MB
+      if (!file.type.startsWith('image/')) {
+        setError(`Invalid format: "${file.name}" is not an image file.`);
+        setPreviewUrl(null);
+        e.target.value = '';
+        return;
+      }
+      if (file.size > MAX_SIZE) {
+        const sizeInMb = (file.size / (1024 * 1024)).toFixed(1);
+        setError(`File too large: "${file.name}" is ${sizeInMb}MB. Maximum allowed is 25MB.`);
+        setPreviewUrl(null);
+        e.target.value = '';
+        return;
+      }
+      setError(null);
+      setPreviewUrl(URL.createObjectURL(file));
+    } else {
+      setPreviewUrl(null);
+    }
   };
 
   const handleUpload = async (e) => {
@@ -80,10 +99,10 @@ export default function BackgroundsClient({ allItems }) {
         <h1 className="text-4xl font-serif mb-2 text-black">Backgrounds</h1>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
         {/* Upload Form */}
         <div className="lg:col-span-1">
-          <div className="bg-white border border-neutral-200 rounded-xl p-6 shadow-sm sticky top-24">
+          <div className="bg-white border border-neutral-200 rounded-xl p-6 shadow-sm md:sticky md:top-24">
             <h2 className="text-xl font-serif mb-6 text-black">Upload New</h2>
 
             {error && (
@@ -122,7 +141,7 @@ export default function BackgroundsClient({ allItems }) {
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                   />
                   {previewUrl ? (
-                    <div className="relative w-full h-44">
+                    <div className="relative w-full h-44 md:h-52">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={previewUrl} alt="Preview" className="object-cover w-full h-full" />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -130,9 +149,10 @@ export default function BackgroundsClient({ allItems }) {
                       </div>
                     </div>
                   ) : (
-                    <div className="px-4 py-8 pointer-events-none">
+                    <div className="px-4 py-8 md:py-12 pointer-events-none">
                       <Upload className="mx-auto h-8 w-8 text-neutral-400 group-hover:text-black mb-2 transition-colors" />
                       <span className="text-sm font-medium text-black block">Click or drag image</span>
+                      <span className="text-[10px] text-neutral-400 block mt-1">Max file size: 25MB</span>
                     </div>
                   )}
                 </div>
@@ -156,7 +176,7 @@ export default function BackgroundsClient({ allItems }) {
               No backgrounds uploaded yet.
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6">
               {allDisplayItems.map(({ src, category, label, id }, idx) => (
                 <div key={idx} className="group relative bg-white rounded-lg overflow-hidden border border-neutral-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
                   <div className="relative h-44 w-full bg-neutral-100 shrink-0">

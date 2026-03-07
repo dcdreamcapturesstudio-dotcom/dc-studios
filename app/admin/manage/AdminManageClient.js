@@ -100,7 +100,7 @@ export default function AdminManageClient({ initialItems }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
         {filteredAndSortedItems.map((item) => (
           <div key={item.id} className="group relative bg-white rounded-lg overflow-hidden border border-neutral-200 shadow-sm hover:shadow-md transition-shadow">
             <div className="relative h-48 w-full bg-neutral-100">

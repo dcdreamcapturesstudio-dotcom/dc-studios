@@ -24,10 +24,10 @@ export default function Sidebar() {
       {/* Mobile Menu Toggle Button */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden fixed top-3 right-4 z-50 p-2 bg-neutral-100 rounded-md text-black"
+        className="md:hidden fixed top-4 right-4 z-100 p-3 bg-white/80 backdrop-blur-md rounded-full text-black shadow-lg border border-neutral-200"
         aria-label="Toggle Menu"
       >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
+        {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
 
       {/* Mobile Backdrop Overlay */}

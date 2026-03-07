@@ -16,12 +16,31 @@ export default function AdminUploadClient({ categories = [] }) {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files || []);
+    
     if (files.length > 2) {
-      setError('You can only upload a maximum of 2 images at once.');
+      setError('Limit exceeded: You can only upload a maximum of 2 images at once.');
       setPreviewUrls([]);
-      e.target.value = ''; // Reset input
+      e.target.value = '';
       return;
     }
+
+    const MAX_SIZE = 25 * 1024 * 1024; // 25MB
+    for (const file of files) {
+      if (!file.type.startsWith('image/')) {
+        setError(`Invalid format: "${file.name}" is not an image file.`);
+        setPreviewUrls([]);
+        e.target.value = '';
+        return;
+      }
+      if (file.size > MAX_SIZE) {
+        const sizeInMb = (file.size / (1024 * 1024)).toFixed(1);
+        setError(`File too large: "${file.name}" is ${sizeInMb}MB. Maximum allowed is 25MB.`);
+        setPreviewUrls([]);
+        e.target.value = '';
+        return;
+      }
+    }
+
     setError(null);
     const urls = files.map(file => URL.createObjectURL(file));
     setPreviewUrls(urls);
@@ -139,7 +158,7 @@ export default function AdminUploadClient({ categories = [] }) {
                 <div className="px-6 py-10 pointer-events-none">
                   <Upload className="mx-auto h-10 w-10 text-neutral-400 group-hover:text-black mb-3 transition-colors" />
                   <span className="text-sm font-medium text-black block mb-1">Click or drag images here</span>
-                  <span className="text-xs text-neutral-500">Max file size: 5MB per image. Select up to 2.</span>
+                  <span className="text-xs text-neutral-500">Max file size: 25MB per image. Select up to 2.</span>
                 </div>
               )}
             </div>
