@@ -48,7 +48,8 @@ export default async function ServicePage({ params }) {
 
   const [
     { data: bgsData },
-    { data: galleryData }
+    { data: galleryData },
+    { data: servicesTableData }
   ] = await Promise.all([
     supabase
       .from('backgrounds')
@@ -57,7 +58,10 @@ export default async function ServicePage({ params }) {
       .from('gallery_images')
       .select('*')
       .in('category', categoryFilters)
-      .order('created_at', { ascending: false })
+      .order('created_at', { ascending: false }),
+    supabase
+      .from('services')
+      .select('*')
   ]);
     
   let heroImage = "";
@@ -71,12 +75,20 @@ export default async function ServicePage({ params }) {
     return [];
   });
 
-  const uploadedImage = bgsData?.find(b => b.category === bgCategoryMap[currentCategory.filter])?.image_url;
+  const getBaseTitle = (t) => t ? t.replace(/ Session$/i, '').replace(/ Photography$/i, '').trim() : "";
+  
+  // 1. Prioritize image from services table (uploaded via "Services Images")
+  const servicesTableMatch = servicesTableData?.find(s => getBaseTitle(s.title) === getBaseTitle(serviceTitle));
+  
+  // 2. Fallback to backgrounds table (older method)
+  const uploadedBackground = bgsData?.find(b => b.category === bgCategoryMap[currentCategory.filter])?.image_url;
 
-  if (uploadedImage) {
-    heroImage = uploadedImage;
+  if (servicesTableMatch?.image_url) {
+    heroImage = servicesTableMatch.image_url;
+  } else if (uploadedBackground) {
+    heroImage = uploadedBackground;
   } else {
-    // Determine fallback
+    // Determine static fallback
     const fallbackServices = {
       "maternity": "/toa-heftiba-C-8uOz7GluA-unsplash.jpg",
       "newborn-photography": "/nihal-karkala-M5aSbOXeDyo-unsplash.jpg",
