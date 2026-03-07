@@ -21,10 +21,14 @@ export const metadata = {
     follow: true,
   },
   icons: {
-    icon: "/dc-image.jpg",
+    icon: [
+      { url: "/dc-image.jpg" },
+      { url: "/dc-image.jpg", sizes: "32x32", type: "image/jpeg" },
+    ],
     shortcut: "/dc-image.jpg",
     apple: "/dc-image.jpg",
   },
+  manifest: "/manifest.json",
   openGraph: {
     type: "website",
     locale: "en_IN",
