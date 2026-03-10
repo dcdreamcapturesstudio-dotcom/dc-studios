@@ -101,6 +101,7 @@ export default function Header() {
                         <Link href="/services/family" className="text-[#333] hover:text-black text-sm tracking-wide">Family Session</Link>
                         <Link href="/services/child-sibling" className="text-[#333] hover:text-black text-sm tracking-wide">Child & Sibling Session</Link>
                         <Link href="/services/fashion" className="text-[#333] hover:text-black text-sm tracking-wide">Fashion Session</Link>
+                        <Link href="/services/bath-tub" className="text-[#333] hover:text-black text-sm tracking-wide">Bath Tub Session</Link>
                      </div>
                   </div>
 
@@ -139,7 +140,7 @@ export default function Header() {
                   <div className="w-1/2 bg-[#f4f2ef] p-12 flex justify-between">
                      <div className="w-1/2 flex flex-col gap-3">
                         <span className="text-[10px] tracking-[0.2em] text-neutral-500 uppercase font-bold mb-2">GALLERY SET 1</span>
-                        {categories.slice(0, 3).map((category, idx) => (
+                        {categories.slice(0, 4).map((category, idx) => (
                           <Link 
                             key={idx} 
                             href={`/gallery/${category.slug}`}
@@ -151,7 +152,7 @@ export default function Header() {
                      </div>
                      <div className="w-1/2 flex flex-col gap-3">
                         <span className="text-[10px] tracking-[0.2em] text-neutral-500 uppercase font-bold mb-2">GALLERY SET 2</span>
-                        {categories.slice(3).map((category, idx) => (
+                        {categories.slice(4).map((category, idx) => (
                           <Link 
                             key={idx} 
                             href={`/gallery/${category.slug}`}
@@ -207,6 +208,7 @@ export default function Header() {
               <Link href="/services/family" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors text-neutral-400 text-sm">Family Session</Link>
               <Link href="/services/child-sibling" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors text-neutral-400 text-sm">Child & Sibling Session</Link>
               <Link href="/services/fashion" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors text-neutral-400 text-sm">Fashion Session</Link>
+              <Link href="/services/bath-tub" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors text-neutral-400 text-sm">Bath Tub Session</Link>
             </div>
           </div>
           
