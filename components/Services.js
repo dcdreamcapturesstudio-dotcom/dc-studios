@@ -35,7 +35,7 @@ function ServiceGridCard({ service, label }) {
 // Each image card gets its own scroll-driven Y translation (for desktop)
 function ServiceScrollCard({ service, label, yTransform }) {
   return (
-    <motion.div style={{ y: yTransform }} className="shrink-0 w-[12.5vw] text-center">
+    <motion.div style={{ y: yTransform }} className="shrink-0 w-[11vw] text-center">
       <Link href={`/services/${service.slug}`} className="group flex flex-col w-full">
         <div className="relative w-full aspect-3/4 overflow-hidden">
           <ImageWithSkeleton

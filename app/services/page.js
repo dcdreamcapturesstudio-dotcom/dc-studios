@@ -52,6 +52,12 @@ const fallbackServices = [
     desc: "Every face has a narrative. Every set is custom-built to match your unique vision, combining fine arts with high fashion. Artistic, bold, and meticulously styled.",
     img: "/yuri-li-p0hDztR46cw-unsplash.jpg",
     slug: "fashion"
+  },
+  {
+    title: "Bath Tub Session",
+    desc: "Artistic and serene bath tub portraits, capturing pure elegance and grace. A unique fine-art experience using curated botanicals and soft lighting.",
+    img: "/placeholder.jpg",
+    slug: "bath-tub"
   }
 ];
 
@@ -101,10 +107,25 @@ export default async function ServicesPage() {
     .select('*')
     .order('created_at', { ascending: false });
 
-  const getBaseTitle = (t) => t ? t.replace(/ Session$/i, '').replace(/ Photography$/i, '').trim() : "";
+  const getBaseTitle = (t) => {
+    if (!t) return "";
+    return t
+      .replace(/ Session$/i, '')
+      .replace(/ Photography$/i, '')
+      .replace(/ Portrait$/i, '')
+      .replace(/[&/]/g, ' ')
+      .trim()
+      .toLowerCase();
+  };
 
   const services = fallbackServices.map(fallback => {
-    const dbMatch = servicesData?.find(s => getBaseTitle(s.title) === getBaseTitle(fallback.title));
+    // 1. Prioritize image from services table
+    const dbMatch = servicesData?.find(s => {
+      const dbTitle = getBaseTitle(s.title);
+      const fbTitle = getBaseTitle(fallback.title);
+      return dbTitle.includes(fbTitle) || fbTitle.includes(dbTitle);
+    });
+
     return {
       ...fallback,
       img: dbMatch?.image_url || fallback.img,

@@ -20,7 +20,7 @@ export default function ServiceDarkLinks() {
       
       if (data) {
         // Defined requested sort order
-        const order = ["Maternity", "Newborn", "Baby", "CakeSmash", "Family", "Child", "Fashion"];
+        const order = ["Maternity", "Newborn", "Baby", "CakeSmash", "Family", "Child", "Fashion", "Bath Tub"];
         
         const getBaseTitle = (t) => t ? t.replace(/ Session$/i, '').replace(/ Photography$/i, '').replace(/ Portrait$/i, '').replace(/ & /g, ' ').replace(/\//g, ' ').trim() : "";
         

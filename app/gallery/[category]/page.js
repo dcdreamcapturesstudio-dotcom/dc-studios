@@ -38,7 +38,8 @@ export default async function GalleryPage({ params }) {
     { title: "Family Session", image_url: "/adele-morris-mDiFpFl_jTs-unsplash.jpg", slug: "family" },
     { title: "Child & Sibling Session", image_url: "/christian-bowen-I0ItPtIsVEE-unsplash.jpg", slug: "child-sibling" },
     { title: "Cake Smash Session", image_url: "/freestocks-ux53SGpRAHU-unsplash.jpg", slug: "cake-smash" },
-    { title: "Fashion Session", image_url: "/yuri-li-p0hDztR46cw-unsplash.jpg", slug: "fashion" }
+    { title: "Fashion Session", image_url: "/yuri-li-p0hDztR46cw-unsplash.jpg", slug: "fashion" },
+    { title: "Bath Tub Session", image_url: "/placeholder.jpg", slug: "bath-tub" }
   ];
 
   // Mapping between gallery category filters and backgrounds table keys
@@ -50,6 +51,7 @@ export default async function GalleryPage({ params }) {
     Family: "family",
     Child: "childSibling",
     Fashion: "fashion",
+    BathTub: "bathTub",
   };
 
   const [

@@ -15,7 +15,7 @@ export default async function ServicesBackgroundsPage() {
       category="servicesImages"
       items={servicesImages || []}
       title="Services Assets"
-      description="Manage the images and text for the Services section on the homepage."
+      description="Manage the images and text for the Services section on the homepage and individual service hero backgrounds."
       requiresDetails={true}
       categories={categories}
     />

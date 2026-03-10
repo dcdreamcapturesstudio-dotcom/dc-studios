@@ -15,6 +15,7 @@ const CATEGORY_OPTIONS = [
   { label: 'Cake Smash',  value: 'cakeSmash' },
   { label: 'Child & Sibling',  value: 'childSibling' },
   { label: 'Fashion',  value: 'fashion' },
+  { label: 'Bath Tub',  value: 'bathTub' },
   { label: 'About - I',  value: 'aboutBgs' },
   { label: 'About - II', value: 'aboutBgs2' },
   { label: 'About - III',       value: 'aboutBgs3' },

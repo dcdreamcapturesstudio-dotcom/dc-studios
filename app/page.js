@@ -106,20 +106,34 @@ export default async function Home() {
   const heroImages = heroData && heroData.length > 0 ? heroData.map(h => h.image_url) : fallbackHeroImages;
   
   // Merge Services: Match DB items to fallbacks by title, ensuring a full 6-item grid
-  const getBaseTitle = (t) => t ? t.replace(/ Session$/i, '').replace(/ Photography$/i, '').replace(/ Portrait$/i, '').replace(/ & /g, ' ').replace(/\//g, ' ').trim() : "";
+    const getBaseTitle = (t) => {
+      if (!t) return "";
+      return t
+        .replace(/ Session$/i, '')
+        .replace(/ Photography$/i, '')
+        .replace(/ Portrait$/i, '')
+        .replace(/[&/]/g, ' ')
+        .trim()
+        .toLowerCase();
+    };
 
-  const services = fallbackServices.map(fallback => {
-    const dbMatch = servicesData?.find(s => getBaseTitle(s.title) === getBaseTitle(fallback.title));
-    if (dbMatch) {
-      return {
-        title: dbMatch.title || fallback.title,
-        slug: dbMatch.slug || fallback.slug,
-        desc: dbMatch.desc || fallback.desc,
-        image_url: dbMatch.image_url || fallback.image_url
-      };
-    }
-    return fallback;
-  });
+    const services = fallbackServices.map(fallback => {
+      const dbMatch = servicesData?.find(s => {
+        const dbTitle = getBaseTitle(s.title);
+        const fbTitle = getBaseTitle(fallback.title);
+        return dbTitle.includes(fbTitle) || fbTitle.includes(dbTitle);
+      });
+      
+      if (dbMatch) {
+        return {
+          title: dbMatch.title || fallback.title,
+          slug: dbMatch.slug || fallback.slug,
+          desc: dbMatch.desc || fallback.desc,
+          image_url: dbMatch.image_url || fallback.image_url
+        };
+      }
+      return fallback;
+    });
 
   // Also add any DB services that DON'T match a fallback (just in case new categories are added)
   const unmatchedDbServices = servicesData?.filter(s => 

@@ -66,7 +66,8 @@ export default function Contact() {
                 <div className="text-sm md:text-base leading-relaxed text-neutral-300 mb-6">
                   <p className="mb-1 text-neutral-400">Photographer</p>
                   <p className="mb-2 max-w-xl text-white">
-                    Exclusively for Newborn, toddlers, maternity shoots, family and also conceptual fashion shoots.
+                    Exclusively for Newborn, toddlers, maternity shoots, conceptual fashion photography, and artistic bath tub portraits in Tirupati. 
+                    Capturing your most precious memories with artistic precision and creative flair.
                   </p>
                 </div>
 

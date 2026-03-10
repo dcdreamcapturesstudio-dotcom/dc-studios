@@ -16,6 +16,7 @@ const fallbackByCategory = {
   Family:     "/adele-morris-mDiFpFl_jTs-unsplash.jpg",
   Child:      "/christian-bowen-I0ItPtIsVEE-unsplash.jpg",
   Fashion:    "/yuri-li-p0hDztR46cw-unsplash.jpg",
+  BathTub:    "/placeholder.jpg",
 };
 
 export default function HomePortfolioPreview({
@@ -32,6 +33,7 @@ export default function HomePortfolioPreview({
     Family: "family",
     Child: "childSibling",
     Fashion: "fashion",
+    BathTub: "bathTub",
   };
 
   // Build one card per category using:

@@ -103,10 +103,23 @@ export default async function ServicePage({ params }) {
     return [];
   });
 
-  const getBaseTitle = (t) => t ? t.replace(/ Session$/i, '').replace(/ Photography$/i, '').trim() : "";
+  const getBaseTitle = (t) => {
+    if (!t) return "";
+    return t
+      .replace(/ Session$/i, '')
+      .replace(/ Photography$/i, '')
+      .replace(/ Portrait$/i, '')
+      .replace(/[&/]/g, ' ')
+      .trim()
+      .toLowerCase();
+  };
   
   // 1. Prioritize image from services table (uploaded via "Services Images")
-  const servicesTableMatch = servicesTableData?.find(s => getBaseTitle(s.title) === getBaseTitle(serviceTitle));
+  const servicesTableMatch = servicesTableData?.find(s => {
+    const dbTitle = getBaseTitle(s.title);
+    const fbTitle = getBaseTitle(serviceTitle);
+    return dbTitle.includes(fbTitle) || fbTitle.includes(dbTitle);
+  });
   
   // 2. Fallback to backgrounds table (older method)
   const uploadedBackground = bgsData?.find(b => b.category === bgCategoryMap[currentCategory.filter])?.image_url;
