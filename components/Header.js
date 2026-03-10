@@ -31,7 +31,7 @@ export default function Header() {
     fetchHeroImages();
   }, []);
 
-  const isSolidPage = pathname === '/services' || pathname === '/portfolio' || pathname === '/contact';
+  const isSolidPage = pathname === '/services' || pathname === '/portfolio' ;
 
   useEffect(() => {
     const handleScroll = () => {
