@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import Link from "next/link";
+import ImageWithSkeleton from "./ImageWithSkeleton";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
 export default function Hero({ images = [] }) {
@@ -47,13 +48,14 @@ export default function Hero({ images = [] }) {
               scale: { duration: 10, ease: "linear" }, // Gentle subtle zoom
             }}
           >
-            <Image
+            <ImageWithSkeleton
               src={images[currentIndex]}
-              fill
-              sizes="(max-width: 768px) 100vw, 100vw"
               alt="Hero background image"
-              className="object-cover"
-              priority={currentIndex === 0} // prioritize loading the first image
+              fill
+              priority={currentIndex === 0}
+              quality={90}
+              sizes="100vw"
+              className="object-cover object-center"
             />
           </motion.div>
         </AnimatePresence>

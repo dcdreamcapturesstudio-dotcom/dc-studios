@@ -46,6 +46,12 @@ const fallbackServices = [
     desc: "A fun and messy celebration for your little one's first birthday. Custom themes and adorable moments captured forever.",
     img: "/freestocks-ux53SGpRAHU-unsplash.jpg",
     slug: "cake-smash"
+  },
+  {
+    title: "Fashion Session",
+    desc: "Every face has a narrative. Every set is custom-built to match your unique vision, combining fine arts with high fashion. Artistic, bold, and meticulously styled.",
+    img: "/yuri-li-p0hDztR46cw-unsplash.jpg",
+    slug: "fashion"
   }
 ];
 

@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ImageWithSkeleton from "./ImageWithSkeleton";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { ArrowUpRight } from "lucide-react";
@@ -13,7 +14,7 @@ function ServiceGridCard({ service, label }) {
   return (
     <Link href={`/services/${service.slug}`} className="group flex flex-col w-full text-center">
       <div className="relative aspect-3/4 overflow-hidden">
-        <Image
+        <ImageWithSkeleton
           src={service.image_url}
           alt={service.title}
           fill
@@ -34,10 +35,10 @@ function ServiceGridCard({ service, label }) {
 // Each image card gets its own scroll-driven Y translation (for desktop)
 function ServiceScrollCard({ service, label, yTransform }) {
   return (
-    <motion.div style={{ y: yTransform }} className="shrink-0 w-[14vw] text-center">
+    <motion.div style={{ y: yTransform }} className="shrink-0 w-[12.5vw] text-center">
       <Link href={`/services/${service.slug}`} className="group flex flex-col w-full">
         <div className="relative w-full aspect-3/4 overflow-hidden">
-          <Image
+          <ImageWithSkeleton
             src={service.image_url}
             alt={service.title}
             fill

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
+import ImageWithSkeleton from "./ImageWithSkeleton";
 import AnimatedText from "./AnimateText";
 import { Reveal } from "./Reveal";
 
@@ -18,7 +19,7 @@ export default function GalleryHero({ src, title, subtitle }) {
         transition={{ duration: 1.5, ease: "easeOut" }}
         className="absolute inset-0"
       >
-        <Image 
+        <ImageWithSkeleton 
           src={src} 
           alt={title} 
           fill 

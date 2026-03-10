@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import ImageWithSkeleton from "./ImageWithSkeleton";
 import { Reveal } from "./Reveal";
 import { Grid, Heart, MessageCircle } from "lucide-react";
 
@@ -37,8 +37,8 @@ export default function Contact() {
               <div className="relative w-36 h-36 md:w-44 md:h-44 shrink-0 mx-auto md:mx-0">
                 
                 <div className="w-full h-full rounded-full overflow-hidden relative bg-black border border-neutral-700">
-                  <Image 
-                    src="/dc-image.jpg" // We can replace this with actual logo if needed
+                  <ImageWithSkeleton 
+                    src="/dc-image.jpg"
                     alt="DC Studios Profile"
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -66,7 +66,7 @@ export default function Contact() {
                 <div className="text-sm md:text-base leading-relaxed text-neutral-300 mb-6">
                   <p className="mb-1 text-neutral-400">Photographer</p>
                   <p className="mb-2 max-w-xl text-white">
-                    Exclusively for Newborn, toddlers, maternity shoots and also conceptual fashion shoots.
+                    Exclusively for Newborn, toddlers, maternity shoots, family and also conceptual fashion shoots.
                   </p>
                 </div>
 

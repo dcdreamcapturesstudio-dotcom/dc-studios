@@ -134,3 +134,19 @@ html.lenis body {
   animation: shimmer-text 3s linear infinite;
   display: inline-block;
 }
+
+@keyframes skeleton-pulse {
+  0% {
+    background-color: #f5f5f5;
+  }
+  50% {
+    background-color: #e5e5e5;
+  }
+  100% {
+    background-color: #f5f5f5;
+  }
+}
+
+.animate-skeleton {
+  animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

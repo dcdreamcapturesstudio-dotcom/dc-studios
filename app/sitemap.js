@@ -8,7 +8,8 @@ export default function sitemap() {
     "baby-toddler",
     "cake-smash",
     "family",
-    "child-sibling"
+    "child-sibling",
+    "fashion"
   ];
 
   const serviceUrls = services.map((slug) => ({

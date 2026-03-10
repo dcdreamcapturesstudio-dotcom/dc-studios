@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ImageWithSkeleton from "./ImageWithSkeleton";
 import { ArrowUpRight, Plus, Layers, Loader2 } from "lucide-react";
 import AnimatedText from "./AnimateText";
 import { Reveal } from "./Reveal";
@@ -34,6 +35,10 @@ const categoryFallbacks = {
   Child: [
     { id: "fb-ch-1", title: "Child & Sibling", image_urls: ["/christian-bowen-I0ItPtIsVEE-unsplash.jpg"] },
     { id: "fb-ch-2", title: "Child & Sibling", image_urls: ["/daniel-thomas-_tYNzEqehMk-unsplash.jpg"] },
+  ],
+  Fashion: [
+    { id: "fb-fs-1", title: "Fashion", image_urls: ["/yuri-li-p0hDztR46cw-unsplash.jpg"] },
+    { id: "fb-fs-2", title: "Fashion", image_urls: ["/adele-morris-mDiFpFl_jTs-unsplash.jpg"] },
   ],
 };
 
@@ -88,7 +93,7 @@ export default function Gallery({ galleryItems = [], categories = defaultCategor
                             handleOpenLightbox(item.id || `${idx}-${itemIdx}`, images);
                           }}
                         >
-                          <Image 
+                          <ImageWithSkeleton 
                             src={Array.isArray(item.image_urls) ? item.image_urls[0] : item.image} 
                             alt={item.title} 
                             fill 

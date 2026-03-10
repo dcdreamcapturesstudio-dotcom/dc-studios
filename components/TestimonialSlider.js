@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, ArrowUp, Star, Quote } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ImageWithSkeleton from "./ImageWithSkeleton";
 import { Reveal } from "./Reveal";
 
 export default function TestimonialSlider({ testimonials, staticImages }) {
@@ -42,10 +43,10 @@ export default function TestimonialSlider({ testimonials, staticImages }) {
         {/* Left Side: Staggered Static Images */}
         <div className="hidden xl:flex w-full xl:w-[45%] relative h-[800px] items-center">
            <div className="absolute left-0 top-0 w-3/5 aspect-[3/4] z-10 shadow-xl overflow-hidden">
-             <Image src={img1} alt="Portfolio 1" fill className="object-cover" />
+             <ImageWithSkeleton src={img1} alt="Portfolio 1" fill className="object-cover" />
            </div>
            <div className="absolute right-0 bottom-12 w-[60%] aspect-[4/5] z-20 shadow-2xl overflow-hidden">
-             <Image src={img2} alt="Portfolio 2" fill className="object-cover" />
+             <ImageWithSkeleton src={img2} alt="Portfolio 2" fill className="object-cover" />
            </div>
         </div>
 
@@ -94,6 +95,17 @@ export default function TestimonialSlider({ testimonials, staticImages }) {
                  </p>
                  
                  <div className="flex items-center gap-6 mt-auto relative z-10">
+                    {testimonials[currentIndex].image && (
+                      <div className="relative w-16 h-16 shrink-0 rounded-full overflow-hidden">
+                        <ImageWithSkeleton
+                          src={testimonials[currentIndex].image}
+                          alt={testimonials[currentIndex].author || testimonials[currentIndex].client_name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover transition-transform duration-700 hover:scale-105"
+                        />
+                      </div>
+                    )}
                     <div>
                        <div className="flex items-center gap-0.5 mb-2">
                          {[1, 2, 3, 4, 5].map((star) => (

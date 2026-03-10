@@ -20,11 +20,13 @@ export default function ServiceDarkLinks() {
       
       if (data) {
         // Defined requested sort order
-        const order = ["Maternity", "Newborn", "Baby/Toddler", "Cake Smash", "Family", "Child & Sibling"];
+        const order = ["Maternity", "Newborn", "Baby", "CakeSmash", "Family", "Child", "Fashion"];
+        
+        const getBaseTitle = (t) => t ? t.replace(/ Session$/i, '').replace(/ Photography$/i, '').replace(/ Portrait$/i, '').replace(/ & /g, ' ').replace(/\//g, ' ').trim() : "";
         
         const sortedData = [...data].sort((a, b) => {
-          const indexA = order.indexOf(a.title);
-          const indexB = order.indexOf(b.title);
+          const indexA = order.findIndex(o => getBaseTitle(a.title).includes(o) || o.includes(getBaseTitle(a.title)));
+          const indexB = order.findIndex(o => getBaseTitle(b.title).includes(o) || o.includes(getBaseTitle(b.title)));
           if (indexA === -1 && indexB === -1) return 0;
           if (indexA === -1) return 1;
           if (indexB === -1) return -1;

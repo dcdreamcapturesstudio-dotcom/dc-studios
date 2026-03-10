@@ -22,11 +22,11 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: "/dc-image.jpg" },
-      { url: "/dc-image.jpg", sizes: "32x32", type: "image/jpeg" },
+      { url: "/dc-favicon.png" },
+      { url: "/dc-favicon.png", sizes: "32x32", type: "image/png" },
     ],
-    shortcut: "/dc-image.jpg",
-    apple: "/dc-image.jpg",
+    shortcut: "/dc-favicon.png",
+    apple: "/dc-favicon.png",
   },
   manifest: "/manifest.json",
   openGraph: {
@@ -38,7 +38,7 @@ export const metadata = {
     description: "Specializing in Newborn, Maternity, and Fashion photography. Capturing timeless memories with a touch of art.",
     images: [
       {
-        url: "/dc-image.jpg",
+        url: "/dc-favicon.png",
         width: 1200,
         height: 630,
         alt: "DC Studios Portfolio",

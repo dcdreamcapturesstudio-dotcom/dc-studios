@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: "Portfolio | DC Studios",
-  description: "Browse our full portfolio — maternity, newborn, baby, cake smash, family, and child sessions.",
+  description: "Browse our full portfolio — maternity, newborn, baby, cake smash, family, child sessions, and fashion photography.",
 };
 
 export default async function PortfolioPage() {
@@ -25,6 +25,7 @@ export default async function PortfolioPage() {
     { title: "Cake Smash", category: "CakeSmash", tags: ["CakeSmash"], image_urls: ["/freestocks-ux53SGpRAHU-unsplash.jpg"] },
     { title: "Family Portrait", category: "Family", tags: ["Family"], image_urls: ["/adele-morris-mDiFpFl_jTs-unsplash.jpg"] },
     { title: "Child & Sibling", category: "Child", tags: ["Child"], image_urls: ["/christian-bowen-I0ItPtIsVEE-unsplash.jpg"] },
+    { title: "Fashion Portrait", category: "Fashion", tags: ["Fashion"], image_urls: ["/yuri-li-p0hDztR46cw-unsplash.jpg"] },
   ];
 
   const galleryItems = galleryData && galleryData.length > 0 ? galleryData : fallbackGalleryItems;

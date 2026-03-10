@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import ImageWithSkeleton from "./ImageWithSkeleton";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import AnimatedText from "./AnimateText";
 import { Reveal } from "./Reveal";
@@ -167,7 +168,7 @@ const PackageBlock = ({ pkg, index }) => {
   );
 };
 
-export default function ServiceDetail({ slug, serviceTitle, heroImage, detailsData, galleryImages = [], bgItems = [] }) {
+export default function ServiceDetail({ slug, serviceTitle, heroImage, detailsData, galleryImages = [], bgItems = [], testimonials = [] }) {
   const containerRef = useRef(null);
 
   const { scrollY } = useScroll();
@@ -188,14 +189,14 @@ export default function ServiceDetail({ slug, serviceTitle, heroImage, detailsDa
             transition={{ duration: 1.5, ease: "easeOut" }}
             className="absolute inset-0"
           >
-            <Image 
-              src={heroImage} 
-              alt={serviceTitle} 
-              fill 
+            <ImageWithSkeleton
+              src={heroImage}
+              alt={serviceTitle}
+              fill
               priority={true}
               quality={90}
               sizes="100vw"
-              className="object-cover object-center" 
+              className="object-cover object-center"
             />
             {/* Dark gradient overlay to make text pop gently */}
             <div className="absolute inset-0 bg-black/30" />
@@ -270,7 +271,7 @@ export default function ServiceDetail({ slug, serviceTitle, heroImage, detailsDa
 
         {/* Testimonials Slider (Mockup 4) */}
         <div className="relative z-10">
-          <TestimonialSlider testimonials={detailsData.testimonials} staticImages={detailsData.portfolioImages} />
+          <TestimonialSlider testimonials={testimonials} staticImages={detailsData.portfolioImages} />
         </div>
 
         <div className="relative z-10">

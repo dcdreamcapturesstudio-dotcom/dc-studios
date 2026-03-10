@@ -39,7 +39,21 @@ export default async function ServicePage({ params }) {
     CakeSmash: "cakeSmash",
     Family: "family",
     Child: "childSibling",
+    Fashion: "fashion",
   };
+  
+  const fallbackTestimonials = [
+    { 
+      text: "I recently visited DC Studios for a photography session for my baby and the experience was excellent from start to finish. Friendly Environment: The studio has a warm and welcoming atmosphere. Mr. Dileep is approachable, patient, and made me and my family feel comfortable throughout the shoot. Professional Services: DC Studios offers a wide range of services including portrait photography, event coverage, product shoots, and editing packages. The photographers are skilled at guiding poses and using lighting creatively to bring out the best in every shot. Quality & Turnaround: The final images were crisp, well-edited, and delivered promptly. I appreciated the attention to detail in both the photography and post-production work. Value: Pricing felt fair compared to the quality of service. Packages are flexible, making it easy to choose what suits your needs. ✅ Overall: DC Studios combines professionalism with a friendly environment, making it a great choice for anyone looking for high-quality photography services in a comfortable setting.", 
+      author: "REKHA C", 
+      sessionType: "BABY PHOTO SESSION", 
+      image: "/nihal-karkala-M5aSbOXeDyo-unsplash.jpg" 
+    },
+    { text: "The maternity shoot made me feel so empowered and beautiful. Every single photo is a treasure.", author: "JESSICA MILLER", sessionType: "MATERNITY SESSION", image: "/toa-heftiba-C-8uOz7GluA-unsplash.jpg" },
+    { text: "They captured my newborn's tiny details so perfectly. I cry happy tears every time I look at them.", author: "PRIYA SHARMA", sessionType: "NEWBORN SESSION", image: "/nihal-karkala-M5aSbOXeDyo-unsplash.jpg" },
+    { text: "The cake smash session was pure magic. My daughter was so comfortable and the photos are incredible.", author: "ANANYA KAPOOR", sessionType: "CAKE SMASH SESSION", image: "/yuri-li-p0hDztR46cw-unsplash.jpg" },
+    { text: "They captured the most natural, beautiful family moments. Absolutely no stiff poses — just real love.", author: "RAHUL & PRIYA PATEL", sessionType: "FAMILY SESSION", image: "/adele-morris-mDiFpFl_jTs-unsplash.jpg" },
+  ];
 
   // Fetch from Supabase for dynamic images (Hero and Gallery)
   const categoryFilters = [currentCategory.filter];
@@ -49,7 +63,8 @@ export default async function ServicePage({ params }) {
   const [
     { data: bgsData },
     { data: galleryData },
-    { data: servicesTableData }
+    { data: servicesTableData },
+    { data: reviewsData }
   ] = await Promise.all([
     supabase
       .from('backgrounds')
@@ -61,8 +76,21 @@ export default async function ServicePage({ params }) {
       .order('created_at', { ascending: false }),
     supabase
       .from('services')
+      .select('*'),
+    supabase
+      .from('reviews')
       .select('*')
+      .order('date', { ascending: false })
   ]);
+
+  const reviews = reviewsData && reviewsData.length > 0 
+    ? reviewsData.map(r => ({
+        text: r.review_text,
+        author: r.client_name,
+        rating: r.rating || 5,
+        sessionType: r.session_type || "CLIENT REVIEW"
+      }))
+    : fallbackTestimonials;
     
   let heroImage = "";
   // Normalize gallery images: handle both image_url and image_urls array
@@ -95,7 +123,8 @@ export default async function ServicePage({ params }) {
       "baby-toddler": "/yuri-li-p0hDztR46cw-unsplash.jpg",
       "cake-smash": "/freestocks-ux53SGpRAHU-unsplash.jpg",
       "family": "/adele-morris-mDiFpFl_jTs-unsplash.jpg",
-      "child-sibling": "/christian-bowen-I0ItPtIsVEE-unsplash.jpg"
+      "child-sibling": "/christian-bowen-I0ItPtIsVEE-unsplash.jpg",
+      "fashion": "/yuri-li-p0hDztR46cw-unsplash.jpg"
     };
     heroImage = fallbackServices[slug] || '/placeholder.jpg';
   }
@@ -108,6 +137,7 @@ export default async function ServicePage({ params }) {
       detailsData={detailsData} 
       galleryImages={galleryImages}
       bgItems={bgsData || []}
+      testimonials={reviews}
     />
   );
 }

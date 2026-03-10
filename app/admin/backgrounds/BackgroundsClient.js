@@ -14,6 +14,7 @@ const CATEGORY_OPTIONS = [
   { label: 'Kids/Toddlers',  value: 'kidsToddlers' },
   { label: 'Cake Smash',  value: 'cakeSmash' },
   { label: 'Child & Sibling',  value: 'childSibling' },
+  { label: 'Fashion',  value: 'fashion' },
   { label: 'About - I',  value: 'aboutBgs' },
   { label: 'About - II', value: 'aboutBgs2' },
   { label: 'About - III',       value: 'aboutBgs3' },

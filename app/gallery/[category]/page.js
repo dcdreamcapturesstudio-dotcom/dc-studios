@@ -37,7 +37,8 @@ export default async function GalleryPage({ params }) {
     { title: "Maternity Session", image_url: "/toa-heftiba-C-8uOz7GluA-unsplash.jpg", slug: "maternity" },
     { title: "Family Session", image_url: "/adele-morris-mDiFpFl_jTs-unsplash.jpg", slug: "family" },
     { title: "Child & Sibling Session", image_url: "/christian-bowen-I0ItPtIsVEE-unsplash.jpg", slug: "child-sibling" },
-    { title: "Cake Smash Session", image_url: "/freestocks-ux53SGpRAHU-unsplash.jpg", slug: "cake-smash" }
+    { title: "Cake Smash Session", image_url: "/freestocks-ux53SGpRAHU-unsplash.jpg", slug: "cake-smash" },
+    { title: "Fashion Session", image_url: "/yuri-li-p0hDztR46cw-unsplash.jpg", slug: "fashion" }
   ];
 
   // Mapping between gallery category filters and backgrounds table keys
@@ -48,6 +49,7 @@ export default async function GalleryPage({ params }) {
     CakeSmash: "cakeSmash",
     Family: "family",
     Child: "childSibling",
+    Fashion: "fashion",
   };
 
   const [

@@ -100,6 +100,7 @@ export default function Header() {
                         <span className="text-[10px] tracking-[0.2em] text-neutral-500 uppercase font-bold mb-2">SET 2</span>
                         <Link href="/services/family" className="text-[#333] hover:text-black text-sm tracking-wide">Family Session</Link>
                         <Link href="/services/child-sibling" className="text-[#333] hover:text-black text-sm tracking-wide">Child & Sibling Session</Link>
+                        <Link href="/services/fashion" className="text-[#333] hover:text-black text-sm tracking-wide">Fashion Session</Link>
                      </div>
                   </div>
 
@@ -172,6 +173,7 @@ export default function Header() {
 
         {/* Mobile Hamburger Icon */}
         <button 
+          suppressHydrationWarning
           className="md:hidden text-black p-1 z-50 bg-white/90 rounded border border-neutral-200"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle Menu"
@@ -190,6 +192,7 @@ export default function Header() {
           
           <div className="flex flex-col gap-2">
             <button 
+              suppressHydrationWarning
               onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
               className="text-white text-md uppercase tracking-widest font-bold flex items-center justify-between w-full text-left"
             >
@@ -203,11 +206,13 @@ export default function Header() {
               <Link href="/services/cake-smash" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors text-neutral-400 text-sm">Cake Smash Session</Link>
               <Link href="/services/family" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors text-neutral-400 text-sm">Family Session</Link>
               <Link href="/services/child-sibling" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors text-neutral-400 text-sm">Child & Sibling Session</Link>
+              <Link href="/services/fashion" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors text-neutral-400 text-sm">Fashion Session</Link>
             </div>
           </div>
           
           <div className="flex flex-col gap-2">
             <button 
+              suppressHydrationWarning
               onClick={() => setMobilePortfolioOpen(!mobilePortfolioOpen)}
               className="text-white text-md uppercase tracking-widest font-bold flex items-center justify-between w-full text-left"
             >

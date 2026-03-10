@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
+import ImageWithSkeleton from './ImageWithSkeleton';
 import { Plus, Layers, Loader2 } from 'lucide-react';
 import { Reveal } from './Reveal';
 import Lightbox from './Lightbox';
@@ -34,7 +34,7 @@ export default function CategoryGalleryGrid({ items = [] }) {
                   className="relative w-full aspect-square md:aspect-4/5 overflow-hidden group cursor-pointer bg-neutral-100"
                   onClick={() => handleOpenLightbox(item.id, images)}
                 >
-                  <Image 
+                  <ImageWithSkeleton 
                     src={images[0]} 
                     alt={item.title} 
                     fill 

@@ -15,6 +15,54 @@ import AnimatedText from "@/components/AnimateText";
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
+export const metadata = {
+  title: "DC Studios | Best Studio for Newborn, Maternity & Fashion in Tirupati",
+  description: "Top-rated photography studio in Tirupati for newborns, maternity, kids, and fashion. Visit DC Studio for timeless, artistic memories.",
+  alternates: {
+    canonical: "https://dcstudios.in",
+  }
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "DC Studios",
+  "image": "https://dcstudios.in/dc-favicon.png",
+  "@id": "https://dcstudios.in",
+  "url": "https://dcstudios.in",
+  "telephone": "+919573717647",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "201, Saryu Homes, Air Bypass Rd, next to SBI Bank, Avilali",
+    "addressLocality": "Tirupati",
+    "addressRegion": "AP",
+    "postalCode": "517502",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 13.6288,
+    "longitude": 79.4192
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "09:00",
+    "closes": "21:00"
+  },
+  "sameAs": [
+    "https://instagram.com/dc.dreamcapturestudio"
+  ]
+};
+
 export default async function Home() {
   // Fetch required data from Supabase concurrently
   const [
@@ -45,6 +93,7 @@ export default async function Home() {
     { title: "Cake Smash Session", slug: "cake-smash", desc: "First birthday celebrations frozen in the most joyful way.", image_url: "/freestocks-ux53SGpRAHU-unsplash.jpg" },
     { title: "Family Session", slug: "family", desc: "Treasured memories of your family, captured with warmth.", image_url: "/adele-morris-mDiFpFl_jTs-unsplash.jpg" },
     { title: "Child & Sibling Session", slug: "child-sibling", desc: "The unique bond between children—full of personality and love.", image_url: "/christian-bowen-I0ItPtIsVEE-unsplash.jpg" },
+    { title: "Fashion Session", slug: "fashion", desc: "High-end conceptual and fashion photography tailored to your style.", image_url: "/yuri-li-p0hDztR46cw-unsplash.jpg" },
   ];
 
   const fallbackGalleryItems = [
@@ -57,7 +106,7 @@ export default async function Home() {
   const heroImages = heroData && heroData.length > 0 ? heroData.map(h => h.image_url) : fallbackHeroImages;
   
   // Merge Services: Match DB items to fallbacks by title, ensuring a full 6-item grid
-  const getBaseTitle = (t) => t ? t.replace(/ Session$/i, '').replace(/ Photography$/i, '').trim() : "";
+  const getBaseTitle = (t) => t ? t.replace(/ Session$/i, '').replace(/ Photography$/i, '').replace(/ Portrait$/i, '').replace(/ & /g, ' ').replace(/\//g, ' ').trim() : "";
 
   const services = fallbackServices.map(fallback => {
     const dbMatch = servicesData?.find(s => getBaseTitle(s.title) === getBaseTitle(fallback.title));
@@ -87,13 +136,12 @@ export default async function Home() {
   }
 
   // Define requested sort order
-  const order = ["Newborn", "Maternity", "Baby/Toddler", "Family", "Cake Smash", "Child & Sibling"];
+  const order = ["Maternity", "Newborn", "Baby", "CakeSmash", "Family", "Child", "Fashion"];
   
   // Sort services based on the predefined order
   services.sort((a, b) => {
-    const getBaseTitle = (t) => t.replace(/ Session$/i, '').replace(/ Photography$/i, '').trim();
-    const indexA = order.indexOf(getBaseTitle(a.title));
-    const indexB = order.indexOf(getBaseTitle(b.title));
+    const indexA = order.findIndex(o => getBaseTitle(a.title).includes(o) || o.includes(getBaseTitle(a.title)));
+    const indexB = order.findIndex(o => getBaseTitle(b.title).includes(o) || o.includes(getBaseTitle(b.title)));
     
     // If title not found in order array, put it at the end
     if (indexA === -1 && indexB === -1) return 0;
@@ -140,6 +188,10 @@ export default async function Home() {
 
   return (
     <div className="bg-white min-h-screen text-black overflow-hidden font-display selection:bg-black selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       <Hero images={heroImages} />
       <Services services={services} />

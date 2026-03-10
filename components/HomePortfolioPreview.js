@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import ImageWithSkeleton from "./ImageWithSkeleton";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { categories } from "../lib/constants";
@@ -14,6 +15,7 @@ const fallbackByCategory = {
   CakeSmash:  "/freestocks-ux53SGpRAHU-unsplash.jpg",
   Family:     "/adele-morris-mDiFpFl_jTs-unsplash.jpg",
   Child:      "/christian-bowen-I0ItPtIsVEE-unsplash.jpg",
+  Fashion:    "/yuri-li-p0hDztR46cw-unsplash.jpg",
 };
 
 export default function HomePortfolioPreview({
@@ -29,6 +31,7 @@ export default function HomePortfolioPreview({
     CakeSmash: "cakeSmash",
     Family: "family",
     Child: "childSibling",
+    Fashion: "fashion",
   };
 
   // Build one card per category using:
@@ -84,7 +87,7 @@ export default function HomePortfolioPreview({
           >
             {/* Image */}
             <div className="relative w-full aspect-3/4 overflow-hidden">
-              <Image
+              <ImageWithSkeleton
                 src={card.src}
                 alt={card.name}
                 fill
