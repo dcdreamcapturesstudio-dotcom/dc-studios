@@ -4,7 +4,8 @@ import Footer from "../../components/Footer";
 import Gallery from "../../components/Gallery";
 
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // revalidate every hour
+
 
 export const metadata = {
   title: "Portfolio | DC Studios",

@@ -12,6 +12,8 @@ import { categories } from "../../../lib/constants";
 import { supabase } from "../../../lib/supabase";
 import { notFound } from "next/navigation";
 import HomePortfolioPreview from "@/components/HomePortfolioPreview";
+export const revalidate = 3600; // revalidate every hour
+
 
 // Generate static params for the static site generation build phase
 export function generateStaticParams() {

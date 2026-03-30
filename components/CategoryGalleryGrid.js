@@ -38,11 +38,12 @@ export default function CategoryGalleryGrid({ items = [] }) {
                     src={images[0]} 
                     alt={item.title} 
                     fill 
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    quality={85}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    quality={80}
                     loading="lazy"
                     className="object-cover transition-transform duration-700 group-hover:scale-105" 
                   />
+
                   
 
                   {images.length > 1 && (
